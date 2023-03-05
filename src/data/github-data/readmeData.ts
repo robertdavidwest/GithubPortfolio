@@ -1,6 +1,6 @@
 import {Octokit} from "@octokit/rest";
 
-import {pipe} from "../toolz"
+import {About, AboutItem} from "../dataDef";
 
 const octokit = new Octokit();
 
@@ -30,7 +30,7 @@ function trimEmptyLines(str: string) {
   return str.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, '').trim();
 }
 
-interface AboutMeList {
+export interface AboutMeList {
   Location: string;
   Nationality: string;
   Study: string;
@@ -38,32 +38,31 @@ interface AboutMeList {
 }
 
 function formatDescription(str: string) {
-  const lines: string[] = trimEmptyLines(str).split('\n');
-  return lines.reduce((a, x, i) => {
-    if (i == lines.length - 1) return a + '</p>';
-    if (x === '') a += '</p><p>';
-    a += x;
-    return a;
-  }, '<p>');
+  return trimEmptyLines(str).split('\n').filter(x=>x!=='');
 }
 
 function formatAboutMeList(str: string) {
   str = trimEmptyLines(str);
-  const params: Partial<AboutMeList> = {};
+  const aboutItems : AboutItem[] = [];
   for (let item of str.split('\n')) {
     item = item.slice(0, 2) === '- ' ? item.slice(2) : item;
-    const [key, value] = item.split(': ');
-    params[key as keyof AboutMeList] = value;
+    const [label, text] = item.split(': ');
+    // const Icon = mapLabelToIcon(label);
+    aboutItems.push({label, text});
   }
-  return params;
+  return aboutItems;
 }
 
 export async function getReadmeData(username: string) {
   const raw = await getUserReadMeRawData(username);
-  const description: string = pipe((x: string) => getRawTaggedData(x, 'description'), 
-                                   formatDescription)(raw);
-  const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
-  const aboutme: Partial<AboutMeList> = formatAboutMeList(rawAboutMe);
 
-  return {description, aboutme};
+  const rawDescription : string = getRawTaggedData(raw, 'description');
+  const descParagraphs: string[] = formatDescription(rawDescription);
+  // const descParagraphs: string[] = pipe((x: string) => getRawTaggedData(x, 'description'), 
+                                        // formatDescription)(raw);
+  const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
+  const aboutItems: AboutItem[] = formatAboutMeList(rawAboutMe);
+
+  const about: About = {descParagraphs, aboutItems};
+  return about;
   }
