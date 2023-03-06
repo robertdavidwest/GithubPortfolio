@@ -1,4 +1,4 @@
-import {GetStaticProps, NextPage} from 'next';
+import {GetServerSideProps, NextPage} from 'next';
 import dynamic from 'next/dynamic';
 import {memo} from 'react';
 
@@ -10,7 +10,7 @@ import Hero from '../components/Sections/Hero';
 import Portfolio from '../components/Sections/Portfolio';
 import Resume from '../components/Sections/Resume';
 import Testimonials from '../components/Sections/Testimonials';
-import {GITHUB_USERNAME,homePageMeta} from '../data/data';
+import {homePageMeta} from '../data/data';
 import {GithubData,GithubDataProps} from '../data/dataDef';
 import {getAllGithubData} from '../data/github-data/main';
 
@@ -33,8 +33,9 @@ const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
   );
 });
 
-export const getStaticProps: GetStaticProps = async () => {
-  const githubData: GithubData = await getAllGithubData(GITHUB_USERNAME);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const username : string = process.env.GITHUB_USERNAME as string;
+  const githubData: GithubData = await getAllGithubData(username);
   return {props: {githubData}};
 }
  
