@@ -40,6 +40,20 @@ import {
   TimelineItem,
 } from './dataDef';
 
+export const GITHUB_USERNAME = 'robertdavidwest';
+
+export function mapLabelToIcon(label: string){
+  switch(label){
+    case 'Age': return CalendarIcon;
+    case 'Employment': return OfficeBuildingIcon;
+    case 'Interests': return SparklesIcon;
+    case 'Location' : return MapIcon;
+    case 'Nationality': return FlagIcon;
+    case 'Study': return AcademicCapIcon;
+    default : return ;
+  }
+}
+
 /**
  * Page meta data
  */
@@ -104,9 +118,9 @@ export const heroData: Hero = {
  */
 export const aboutData: About = {
   profileImageSrc: profilepic,
-  description: `Use this bio section as your way of describing yourself and saying what you do, what technologies you like
+  descParagraphs: [`Use this bio section as your way of describing yourself and saying what you do, what technologies you like
   to use or feel most comfortable with, describing your personality, or whatever else you feel like throwing
-  in.`,
+  in.`],
   aboutItems: [
     {label: 'Location', text: 'Victoria, BC', Icon: MapIcon},
     {label: 'Age', text: '29', Icon: CalendarIcon},

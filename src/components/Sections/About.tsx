@@ -1,12 +1,20 @@
 import classNames from 'classnames';
+import {NextPage} from 'next';
 import Image from 'next/image';
-import {FC, memo} from 'react';
+import {memo} from 'react';
 
-import {aboutData, SectionId} from '../../data/data';
+import {aboutData, mapLabelToIcon, SectionId} from '../../data/data';
+import {AboutItem, GithubData} from '../../data/dataDef';
 import Section from '../Layout/Section';
 
-const About: FC = memo(() => {
-  const {profileImageSrc, description, aboutItems} = aboutData;
+const About: NextPage<GithubData> = memo(({about}) => {
+  const descParagraphs : string[] = about.descParagraphs; 
+  const aboutItems : AboutItem[] = about.aboutItems.map( (x:AboutItem)=>{
+      x.Icon = mapLabelToIcon(x.label);
+      return x;
+    })
+  const {profileImageSrc} = aboutData;
+
   return (
     <Section className="bg-neutral-800" sectionId={SectionId.About}>
       <div className={classNames('grid grid-cols-1 gap-y-4', {'md:grid-cols-4': !!profileImageSrc})}>
@@ -20,7 +28,9 @@ const About: FC = memo(() => {
         <div className={classNames('col-span-1 flex flex-col gap-y-6', {'md:col-span-3': !!profileImageSrc})}>
           <div className="flex flex-col gap-y-2">
             <h2 className="text-2xl font-bold text-white">About me</h2>
-            <p className="prose prose-sm text-gray-300 sm:prose-base">{description}</p>
+            {descParagraphs.map((x:string, i:number) => {
+              return <p className="prose prose-sm text-gray-300 sm:prose-base" key={i} >{x}</p> 
+            })}
           </div>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {aboutItems.map(({label, text, Icon}, idx) => (
