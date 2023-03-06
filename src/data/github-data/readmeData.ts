@@ -30,13 +30,6 @@ function trimEmptyLines(str: string) {
   return str.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, '').trim();
 }
 
-export interface AboutMeList {
-  Location: string;
-  Nationality: string;
-  Study: string;
-  Interests: string
-}
-
 function formatDescription(str: string) {
   return trimEmptyLines(str).split('\n').filter(x=>x!=='');
 }
@@ -47,7 +40,6 @@ function formatAboutMeList(str: string) {
   for (let item of str.split('\n')) {
     item = item.slice(0, 2) === '- ' ? item.slice(2) : item;
     const [label, text] = item.split(': ');
-    // const Icon = mapLabelToIcon(label);
     aboutItems.push({label, text});
   }
   return aboutItems;
