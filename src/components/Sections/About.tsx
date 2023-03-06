@@ -1,30 +1,20 @@
 import classNames from 'classnames';
+import {NextPage} from 'next';
 import Image from 'next/image';
-import {FC, memo} from 'react';
+import {memo} from 'react';
 
-import {mapLabelToIcon} from '../../data/data';
-import {aboutData, SectionId} from '../../data/data';
-import {AboutItem} from '../../data/dataDef';
+import {aboutData, mapLabelToIcon, SectionId} from '../../data/data';
+import {AboutItem, GithubData} from '../../data/dataDef';
 import Section from '../Layout/Section';
 
-const About: FC = memo(({githubData}: any) => {
-
-  let descParagraphs : string[];
-  let aboutItems : AboutItem[];
-  if (githubData){
-    descParagraphs = githubData.about.descParagraphs; 
-    aboutItems = githubData.about.aboutItems.map( (x:AboutItem)=>{
+const About: NextPage<GithubData> = memo(({about}) => {
+  const descParagraphs : string[] = about.descParagraphs; 
+  const aboutItems : AboutItem[] = about.aboutItems.map( (x:AboutItem)=>{
       x.Icon = mapLabelToIcon(x.label);
       return x;
     })
-  } else {
-    descParagraphs = [];
-    aboutItems = [];
-  }
-  console.log(githubData);
-
-  // const {profileImageSrc, descParagraphs, aboutItems} = aboutData;
   const {profileImageSrc} = aboutData;
+
   return (
     <Section className="bg-neutral-800" sectionId={SectionId.About}>
       <div className={classNames('grid grid-cols-1 gap-y-4', {'md:grid-cols-4': !!profileImageSrc})}>

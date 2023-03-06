@@ -58,8 +58,6 @@ export async function getReadmeData(username: string) {
 
   const rawDescription : string = getRawTaggedData(raw, 'description');
   const descParagraphs: string[] = formatDescription(rawDescription);
-  // const descParagraphs: string[] = pipe((x: string) => getRawTaggedData(x, 'description'), 
-                                        // formatDescription)(raw);
   const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
   const aboutItems: AboutItem[] = formatAboutMeList(rawAboutMe);
 
