@@ -40,6 +40,8 @@ import {
   TimelineItem,
 } from './dataDef';
 
+export const GITHUB_USERNAME = 'robertdavidwest';
+
 export function mapLabelToIcon(label: string){
   switch(label){
     case 'Age': return CalendarIcon;
