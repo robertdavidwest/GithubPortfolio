@@ -10,6 +10,7 @@ export interface GithubDataProps {
 export interface GithubData {
   about: About;
   skills: SkillGroup[];
+  portfolioItems: PortfolioItem[];
 }
 
 export interface HomepageMeta {
