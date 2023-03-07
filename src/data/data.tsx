@@ -40,33 +40,6 @@ import {
   TimelineItem,
 } from './dataDef';
 
-import {Octokit} from '@octokit/rest';
-const octokit = new Octokit();
-
-async function fetchData(username: string) {
-  const {data} = await octokit.request(`GET /users/${username}/starred`);
-  console.log(data);
-
-  const portfolioItems: PortfolioItem[] = [];
-  for (let repo of data) {
-    const portfolioItemData = {
-      title: repo.name,
-      description: repo.description,
-      url: repo.homepage,
-      image: repo.owner.avatar_url,
-    };
-
-    portfolioItems.push(portfolioItemData);
-  }
-
-  console.log(portfolioItems);
-  // the return value of this fn can be used to populate the portfolioItems export on line 224 instead of the default data
-  // in github, each featured project must be starred, and should include a description, hompageUrl, and avatarImg
-  return portfolioItems;
-}
-
-fetchData('CJung14');
-
 /**
  * Page meta data
  */
@@ -221,6 +194,34 @@ export const skills: SkillGroup[] = [
 /**
  * Portfolio section
  */
+import {Octokit} from '@octokit/rest';
+const octokit = new Octokit();
+
+const getPortfolioData = async (username: string) => {
+  const {data} = await octokit.request(`GET /users/${username}/starred`);
+
+  const portfolioItems: PortfolioItem[] = [];
+  for (let repo of data) {
+    const portfolioItemData = {
+      title: repo.name,
+      description: repo.description,
+      url: repo.homepage,
+      image: repo.owner.avatar_url,
+    };
+
+    portfolioItems.push(portfolioItemData);
+  }
+
+  // the return value of this fn can be used to populate the portfolioItems export on line 224 instead of the default data
+  // in github, each featured project must be starred, and should include a description, hompageUrl, and avatarImg
+  return portfolioItems;
+};
+
+const test = await getPortfolioData('CJung14');
+console.log(test);
+
+// export const portfolioItems =
+
 export const portfolioItems: PortfolioItem[] = [
   {
     title: 'Project title 1',
