@@ -1,3 +1,80 @@
+# Github Portfolio
+
+This project is a fork of the excellent [React JS Resume Project](https://github.com/tbakerx/react-resume-template) by [Tim Baker](https://github.com/tbakerx).
+
+Team Alphaca has taken Tim's React App and automated the Data Ingestion from Github. Any dev can now very quickly and easily turn their existing Github account into a beautifully rendered Portfolio website!
+
+## How it works
+
+When you run this app in Dev or Prod, data will be automatically pulled from your public Github data, including your Bio and information and all of your **Starred** Github repos will show up as your projects in your portfolio!
+
+## Set up your Github Profile
+
+You will just need to make sure that your Github account conforms to the following features and your data will automatically be rendered.
+
+1. Create a user repo: Your Github Account should have a profile landing page. This is achieved by creating a github repo with the same name as your username.
+2. Create a `README.md` file in the repo: In your github user repo you will need a README file. In here you can store information for people to see when they visit your Github page, which is something we suggest you do even if you are not using this Github Portfolio builder.
+3. Inside the `README.md` add information about yourself, using the following template:
+
+   1. Add a **description** of yourself, this will show up in the aboutme section. Place the description between these tags:
+
+      ```
+      <!-- description-start -->
+      Use this bio section as your way of describing yourself and saying what you do, ...
+      <!-- description-end -->
+      ```
+
+   2. Add **aboutme** bullet points. These will also show up in the aboutme section. Add bullet points with a label followed by a colon:
+
+      ```
+      <!-- aboutme-list-start -->
+      - Location: in Space
+      - Nationality: Alien
+      - Study: Milky Way University
+      - Interests: Humans
+      - Age: 500000
+      - Employment: Oberver, Aliens Inc.
+      <!-- aboutme-list-end -->
+      ```
+
+      (NOTE1: You can omit any of these categories and everything will still work)
+      (NOTE2: You can add any custom categories, they will just show up without a logo)
+
+   3. Add a list of **skills** and **levels**, copy the format below:
+
+      ```
+      <!-- skills-start -->
+      - Languages: Python: 8/10, JavaScript: 7/10, ...
+      - Frontend: React: 7/10, ...
+      - Backend: Node.js
+      <!-- skills-end -->
+      ```
+
+      (NOTE: Add as many bullets as you like, ensure the format matches exactly, including spacing)
+
+   (NOTE: If you don't want to show any of the following information on your Github page but still want it in your Github Portfolio then just put it between html comment tags ! like this: `<-- info here i dont want to show -->`
+
+   ```
+
+   ```
+
+## Dev Setup
+
+You will need to create an environment file called `.env` and add your github user account to the file:
+
+```
+# .env
+GITHUB_USERNAME=<your-username>
+```
+
+## Github Account Configuration for the project
+
+to be written...
+
+Now that your Github account is configured correctly, follow the steps below to set up your Portfolio website!
+
+Below see the original README from Tim's project:
+
 # React JS Resume Website Template
 
 ![ReactJS Resume Website Template](resume-screenshot.jpg?raw=true 'ReactJS Resume Website Template')
@@ -25,12 +102,13 @@
 #### If this template has helped you and you'd like to support my work, feel free to [♥️ Sponsor](https://github.com/sponsors/tbakerx) the project
 
 ### 🎉 Version 2 is here! New features:
+
 1. Completely rebuilt with React and full typescript support
 2. Built on the [Next.js](https://nextjs.org/) framework for easy server side rendering/static generation, image optimization, api routes, and deployment
 3. Styled entirely with [TailwindCss](https://tailwindcss.com/)
 4. Re-organized data population file for customizing site.
 5. Significant improvement/modernization of all site sections
- 
+
 **Looking for the old version? You can find it [here.](https://github.com/tbakerx/react-resume-template/releases/tag/v1.0.0)**
 
 ## Description
@@ -53,9 +131,10 @@ Once you have your own copy of this repo forked and downloaded, open the folder 
 
 ### 4. Customize the data to make it your own
 
-All of the data for the site is driven via a file at `/src/data/data.tsx`. This is where you'll find the existing content, and updating the values here will be reflected on the site. If you have the site running as described above, you should see these changes reflected on save. The data types for all of these items are given in the same folder in the `dataDef.ts` file. Example images can be found at `src/images/` and are imported in the data file. To change, simply update these images using the same name and location, or add new images and update the imports. 
+All of the data for the site is driven via a file at `/src/data/data.tsx`. This is where you'll find the existing content, and updating the values here will be reflected on the site. If you have the site running as described above, you should see these changes reflected on save. The data types for all of these items are given in the same folder in the `dataDef.ts` file. Example images can be found at `src/images/` and are imported in the data file. To change, simply update these images using the same name and location, or add new images and update the imports.
 
 ### 5. Hook up contact form
+
 Due to the variety of options available for contact form providers, I've hooked up the contact form only so far as handling inputs and state. Form submission and the actual sending of the email is open to your own implementation. My personal recommendation for email provider is [Sendgrid.](https://sendgrid.com/)
 
 ### 6. Make any other changes you like
@@ -81,4 +160,3 @@ Deploying your new site to Vercel is simple, and can be done by following their 
 ## Forkers
 
 [![Forkers repo roster for @tbakerx/react-resume-template](https://reporoster.com/forks/dark/tbakerx/react-resume-template)](https://github.com/tbakerx/react-resume-template/network/members)
-

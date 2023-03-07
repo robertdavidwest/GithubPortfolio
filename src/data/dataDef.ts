@@ -3,6 +3,15 @@ import {FC, SVGProps} from 'react';
 
 import {IconProps} from '../components/Icon/Icon';
 
+export interface GithubDataProps {
+  githubData: GithubData;
+}
+
+export interface GithubData {
+  about: About;
+  skills: SkillGroup[];
+}
+
 export interface HomepageMeta {
   title: string;
   description: string;
@@ -39,7 +48,7 @@ interface HeroActionItem {
  */
 export interface About {
   profileImageSrc?: string;
-  description: string;
+  descParagraphs: string[];
   aboutItems: AboutItem[];
 }
 
