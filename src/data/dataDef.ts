@@ -9,6 +9,7 @@ export interface GithubDataProps {
 
 export interface GithubData {
   about: About;
+  skills: SkillGroup[];
 }
 
 export interface HomepageMeta {

@@ -1,6 +1,6 @@
 import {Octokit} from "@octokit/rest";
 
-import {About, AboutItem} from "../dataDef";
+import {About, AboutItem, Skill, SkillGroup} from "../dataDef";
 
 const octokit = new Octokit();
 
@@ -45,15 +45,40 @@ function formatAboutMeList(str: string) {
   return aboutItems;
 }
 
+function formatRawSkill(str: string){
+ const [name, levelStr] = str.split(": ");
+ const level = Number(levelStr.replace("/10", ""));
+ return {name, level}
+}
+
+function formatSkillGroup(str: string){
+  const name = str.substring(0, str.indexOf(": "));
+  const levelsRaw =  str.substring(str.indexOf(": ") + 2);
+  const skillLevelListRaw = levelsRaw.split(", ");
+  const skills : Skill[] = [];
+  skillLevelListRaw.forEach((x:string)=>{
+    skills.push(formatRawSkill(x));
+  })
+  return {name, skills};
+}
+
+function formatSkillsList(str: string) {
+  str = trimEmptyLines(str);
+  const skills : SkillGroup[] = [];
+  for (let item of str.split('\n')) {
+    item = item.slice(0, 2) === '- ' ? item.slice(2) : item;
+    skills.push(formatSkillGroup(item))
+  }
+  return skills;
+}
+
 async function getProfileImgSrc(username: string){
   const res = await fetch(`https://api.github.com/users/${username}`);
   const {id} = await res.json();
   return `https://avatars.githubusercontent.com/u/${id}`;
 }
 
-
-export async function getReadmeData(username: string) {
-  const raw = await getUserReadMeRawData(username);
+async function getAboutData(raw: string, username: string){
   const rawDescription : string = getRawTaggedData(raw, 'description');
   const descParagraphs: string[] = formatDescription(rawDescription);
   const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
@@ -62,4 +87,17 @@ export async function getReadmeData(username: string) {
   const profileImageSrc : string = await getProfileImgSrc(username);
   const about: About = {descParagraphs, aboutItems, profileImageSrc} ;
   return about;
+}
+
+function getSkillsData(raw: string){
+  const rawSkills: string = getRawTaggedData(raw, 'skills')  
+  const skills : SkillGroup[] = formatSkillsList(rawSkills)
+  return skills
+}
+
+export async function getReadmeData(username: string) {
+  const raw = await getUserReadMeRawData(username);
+  const about: About = await getAboutData(raw, username);
+  const skills: SkillGroup[] = getSkillsData(raw);
+  return {about, skills};
   }
