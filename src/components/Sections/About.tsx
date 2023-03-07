@@ -3,17 +3,16 @@ import {NextPage} from 'next';
 import Image from 'next/image';
 import {memo} from 'react';
 
-import {aboutData, mapLabelToIcon, SectionId} from '../../data/data';
+import {mapLabelToIcon, SectionId} from '../../data/data';
 import {AboutItem, GithubData} from '../../data/dataDef';
 import Section from '../Layout/Section';
 
 const About: NextPage<GithubData> = memo(({about}) => {
-  const descParagraphs : string[] = about.descParagraphs; 
+  const {descParagraphs, profileImageSrc} = about; 
   const aboutItems : AboutItem[] = about.aboutItems.map( (x:AboutItem)=>{
       x.Icon = mapLabelToIcon(x.label);
       return x;
     })
-  const {profileImageSrc} = aboutData;
 
   return (
     <Section className="bg-neutral-800" sectionId={SectionId.About}>

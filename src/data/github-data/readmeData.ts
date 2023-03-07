@@ -45,14 +45,21 @@ function formatAboutMeList(str: string) {
   return aboutItems;
 }
 
+async function getProfileImgSrc(username: string){
+  const res = await fetch(`https://api.github.com/users/${username}`);
+  const {id} = await res.json();
+  return `https://avatars.githubusercontent.com/u/${id}`;
+}
+
+
 export async function getReadmeData(username: string) {
   const raw = await getUserReadMeRawData(username);
-
   const rawDescription : string = getRawTaggedData(raw, 'description');
   const descParagraphs: string[] = formatDescription(rawDescription);
   const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
   const aboutItems: AboutItem[] = formatAboutMeList(rawAboutMe);
-
-  const about: About = {descParagraphs, aboutItems};
+  
+  const profileImageSrc : string = await getProfileImgSrc(username);
+  const about: About = {descParagraphs, aboutItems, profileImageSrc} ;
   return about;
   }
