@@ -10,6 +10,7 @@ export interface GithubDataProps {
 export interface GithubData {
   about: About;
   skills: SkillGroup[];
+  testimonialSection: TestimonialSection;
 }
 
 export interface HomepageMeta {
@@ -112,6 +113,8 @@ export interface TestimonialSection {
 
 export interface Testimonial {
   image?: string;
+  title?: string;
+  company?: string;
   name: string;
   text: string;
 }
