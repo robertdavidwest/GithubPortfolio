@@ -10,7 +10,7 @@ export interface GithubDataProps {
 export interface GithubData {
   about: About;
   skills: SkillGroup[];
-  testimonialSection: TestimonialSection;
+  testimonialSection: TestimonialSection | null;
 }
 
 export interface HomepageMeta {

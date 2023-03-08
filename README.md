@@ -68,6 +68,8 @@ We have also made it possible for you to pull in your Experience, Education and 
 
 That's it! Now the Sections **Experience**, **Education** and **Recommendations** will be populated with your data from linkedin. Anytime you want to refresh your linkedin data just download a new file from linkedin and replace the old one in the `linkedinData` repo.
 
+If you choose not to include linkedin data then these sections will simply be omitted from the portfolio site.
+
 ## Dev Setup
 
 You will need to create an environment file called `.env` and add your github user account to the file:
@@ -75,7 +77,6 @@ You will need to create an environment file called `.env` and add your github us
 ```
 # .env
 GITHUB_USERNAME=<your-username>
-USE_LINKEDIN_DATA=false # only set to true if you have made linkedin data avilable in the repo `linkedinData`
 ```
 
 ## Github Account Configuration for the project

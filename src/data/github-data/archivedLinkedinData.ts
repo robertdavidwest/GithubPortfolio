@@ -57,17 +57,13 @@ function convertRawCsvToRecordList(raw: string){
   return data;
 }
 
-// interface Recommendation {
-//   FirstName: string;
-//   LastName: string;
-//   Company: string;
-//   Job: string;
-//   Title: string;
-//   Text: string
-// }
-
 export async function getLinkedinData(githubUsername: string){
-  const raw = await getLinkedinRecommendations(githubUsername)
+  let raw : string;
+  try {
+    raw = await getLinkedinRecommendations(githubUsername)
+  } catch (error) {
+    return null
+  }
   const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
   const testimonials : Testimonial[] = [];
   for (const record of data){
