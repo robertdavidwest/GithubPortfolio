@@ -26,7 +26,9 @@ const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
       <About {...githubData} />
       <Resume {...githubData} />
       <Portfolio />
-      <Testimonials />
+      {githubData.testimonialSection ? 
+      <Testimonials {...githubData} /> : null
+      }
       <Contact />
       <Footer />
     </Page>
