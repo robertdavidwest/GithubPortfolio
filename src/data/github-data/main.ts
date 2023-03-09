@@ -6,7 +6,7 @@ export async function getAllGithubData(username: string) {
   // Add all function calls here to collect all github data 
   // in one place: 
   const {about, skills}= await getReadmeData(username);
-  const {education, testimonialSection} = await getLinkedinData(username);
-  const githubData : GithubData = {about, education, skills, testimonialSection};
+  const {education, experience, testimonialSection} = await getLinkedinData(username);
+  const githubData : GithubData = {about, education, experience, skills, testimonialSection};
   return githubData;
 }

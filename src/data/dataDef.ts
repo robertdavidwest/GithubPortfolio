@@ -10,6 +10,7 @@ export interface GithubDataProps {
 export interface GithubData {
   about: About;
   education: TimelineItem[];
+  experience: TimelineItem[];
   skills: SkillGroup[];
   testimonialSection: TestimonialSection;
 }
