@@ -16,7 +16,7 @@ async function getUserReadMeRawData(user: string) {
   } else return "";
 }
 
-function getRawTaggedData(str: string, tagName: string) {
+export function getRawTaggedData(str: string, tagName: string) {
   let data;
   const openTag = `<!-- ${tagName}-start -->`;
   const closeTag = `<!-- ${tagName}-end -->`;

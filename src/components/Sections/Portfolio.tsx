@@ -25,7 +25,7 @@ const Portfolio: NextPage<GithubData> = memo(({portfolioItems}) => {
                     'relative h-max w-full overflow-hidden rounded-lg shadow-lg shadow-black/30 lg:shadow-xl',
                   )}>
                   {/* <Image alt={title} layout="responsive" placeholder="blur" src={image} /> */}
-                  <Image alt={title} layout="fill" src={image} />
+                  <Image alt={title} height="420px" width="420px" src={image} />
                   <ItemOverlay item={item} />
                 </div>
               </div>
