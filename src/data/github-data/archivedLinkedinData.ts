@@ -25,9 +25,9 @@ async function getLinkedinRawEducation(user: string) {
   return getLinkedinRawData(user, "Education.csv");
 }
 
-// async function getLinkedinRawExperience(user: string) {
-  // return getLinkedinRawData(user, "Positions.csv");
-// }
+async function getLinkedinRawExperience(user: string) {
+  return getLinkedinRawData(user, "Positions.csv");
+}
 
 // Return array of string values, or NULL if CSV string not well formed.
 function csvToArray(text: string) {
@@ -71,7 +71,6 @@ function convertRawCsvToRecordList(raw: string){
 
 async function createEducation_(githubUsername: string){
   const raw = await getLinkedinRawEducation(githubUsername)
-  console.log(raw);
   const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
   const education : TimelineItem[] = [];
   for (const record of data){
@@ -91,6 +90,30 @@ async function createEducation(githubUsername: string){
   } catch (error) {
     const education : TimelineItem[] = []
     return education;
+  }
+}
+
+async function createExperience_(githubUsername: string){
+  const raw = await getLinkedinRawExperience(githubUsername)
+  const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
+  const experience : TimelineItem[] = [];
+  for (const record of data){
+    experience.push({
+      date: `${record['StartedOn']} - ${record['FinishedOn']}`,
+      location: record['CompanyName'],
+      title: record['Title'],
+      content: record['Description'].split('  ')
+    })
+  }
+  return experience;
+}
+
+async function createExperience(githubUsername: string){
+  try {
+    return await createExperience_(githubUsername)
+  } catch (error) {
+    const experience : TimelineItem[] = []
+    return experience;
   }
 }
 
@@ -124,5 +147,6 @@ async function createTestimonials(githubUsername: string){
 export async function getLinkedinData(githubUsername: string){
     const testimonialSection = await createTestimonials(githubUsername);
     const education = await createEducation(githubUsername);
-    return {education, testimonialSection};
+    const experience = await createExperience(githubUsername);
+    return {education, experience, testimonialSection};
 }

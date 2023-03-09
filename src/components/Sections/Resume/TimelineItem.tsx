@@ -14,7 +14,9 @@ const TimelineItem: FC<{item: TimelineItem}> = memo(({item}) => {
           <span className="flex-1 text-sm sm:flex-none">{date}</span>
         </div>
       </div>
-      {content.map((x, i)=><p key={i}>{x}</p>)}
+      {content.map((x, i)=>{
+      return (i === content.length - 1 ? <p key={i}>{x}</p> : <div key={i}><p>{x}</p><br/></div>)
+      })}
     </div>
   );
 });

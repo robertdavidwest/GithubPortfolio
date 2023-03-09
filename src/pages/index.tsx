@@ -22,7 +22,7 @@ const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
   return (
     <Page description={description} title={title}>
       <Header />
-      <Hero />
+      <Hero {...githubData}/>
       <About {...githubData} />
       <Resume {...githubData} />
       <Portfolio />

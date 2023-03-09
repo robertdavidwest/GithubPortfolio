@@ -54,6 +54,11 @@ You will just need to make sure that your Github account conforms to the followi
 
    (NOTE: If you don't want to show any of the following information on your Github page but still want it in your Github Portfolio then just put it between html comment tags ! like this: `<-- info here i dont want to show -->`
 
+4. Upload your resume to github in one of either of these locations (if you have data in both them number 1 will be selected):
+
+   1. `https://github.com/<username>/<username>/blob/main/resume.pdf` (note: `main` or `master` will work fine)
+   2. `https://github.com/<username>/resume/blob/main/resume.pdf` (note: `main` or `master` will work fine)
+
 ## Upload your Linkedin data to Github (optional)
 
 We have also made it possible for you to pull in your Experience, Education and received recommendations from your linked in profile! Unfortunetely LinkedIn does not make this data available via an API. So will need to follow these steps to manually obtain your linkedin data and use it on your website:
