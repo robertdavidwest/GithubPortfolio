@@ -11,6 +11,7 @@ export interface GithubData {
   about: About;
   education: TimelineItem[];
   experience: TimelineItem[];
+  heroData: Hero;
   skills: SkillGroup[];
   testimonialSection: TestimonialSection;
 }
@@ -33,16 +34,17 @@ export interface HomepageMeta {
  * Hero section
  */
 export interface Hero {
-  imageSrc: string;
+  imageSrc?: string;
   name: string;
-  description: JSX.Element;
+  description: string[];
   actions: HeroActionItem[];
 }
 
-interface HeroActionItem {
+export interface HeroActionItem {
   href: string;
   text: string;
   primary?: boolean;
+  download: boolean;
   Icon?: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 }
 

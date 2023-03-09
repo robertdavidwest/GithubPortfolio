@@ -26,7 +26,7 @@ async function getLinkedinRawEducation(user: string) {
 }
 
 async function getLinkedinRawExperience(user: string) {
-  return getLinkedinRawData(user, "Positionss.csv");
+  return getLinkedinRawData(user, "Positions.csv");
 }
 
 // Return array of string values, or NULL if CSV string not well formed.
@@ -97,7 +97,6 @@ async function createExperience_(githubUsername: string){
   const raw = await getLinkedinRawExperience(githubUsername)
   const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
   const experience : TimelineItem[] = [];
-  console.log(raw);
   for (const record of data){
     experience.push({
       date: `${record['StartedOn']} - ${record['FinishedOn']}`,

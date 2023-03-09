@@ -1,19 +1,24 @@
 import {Octokit} from "@octokit/rest";
 
-import {About, AboutItem, Skill, SkillGroup} from "../dataDef";
+import {SectionId} from "../data";
+import {About, AboutItem, Hero, HeroActionItem, Skill, SkillGroup} from "../dataDef";
 
 const octokit = new Octokit();
 
-async function getUserReadMeRawData(user: string) {
+async function getRawFile(user: string, repo: string, path: string){
   const {data} = await octokit.rest.repos.getContent({
     owner: user,
-    repo: user,
-    path: 'README.md',
+    repo: repo,
+    path: path,
   });
   if("content" in data){
     const content: string = Buffer.from(data.content, 'base64').toString();
     return content;
   } else return "";
+}
+
+async function getUserReadMeRawData(user: string) {
+  return  getRawFile(user, user, 'README.md');
 }
 
 function getRawTaggedData(str: string, tagName: string) {
@@ -72,32 +77,75 @@ function formatSkillsList(str: string) {
   return skills;
 }
 
-async function getProfileImgSrc(username: string){
+async function getUserInfo(username: string){
   const res = await fetch(`https://api.github.com/users/${username}`);
-  const {id} = await res.json();
-  return `https://avatars.githubusercontent.com/u/${id}`;
+  return res.json(); 
 }
 
-async function getAboutData(raw: string, username: string){
+async function getProfileImgSrc(userId: number ){
+  return `https://avatars.githubusercontent.com/u/${userId}`;
+}
+
+async function createAboutData(raw: string, userId: number){
   const rawDescription : string = getRawTaggedData(raw, 'description');
   const descParagraphs: string[] = formatDescription(rawDescription);
   const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
   const aboutItems: AboutItem[] = formatAboutMeList(rawAboutMe);
   
-  const profileImageSrc : string = await getProfileImgSrc(username);
+  const profileImageSrc : string = await getProfileImgSrc(userId);
   const about: About = {descParagraphs, aboutItems, profileImageSrc} ;
   return about;
 }
 
-function getSkillsData(raw: string){
+function createSkillsData(raw: string){
   const rawSkills: string = getRawTaggedData(raw, 'skills')  
   const skills : SkillGroup[] = formatSkillsList(rawSkills)
   return skills
 }
 
-export async function getReadmeData(username: string) {
+async function createHeroData(username: string, name: string, bio: string){
+  // trt all these hrefs in this order and use the first one that works
+  const hrefs = [
+  `https://github.com/${username}/${username}/blob/HEAD/resume.pdf`,
+  `https://github.com/${username}/resume/blob/HEAD/resume.pdf`
+  ]
+  let href = '';
+  let i = 0;
+  while (href === ''){
+    if (i === hrefs.length) break;
+      href = hrefs[i];
+      const response = await fetch(href);
+      if (response.status===200) break;
+      href = '';
+      i++;
+  }
+
+  const actions : HeroActionItem[]= [
+    {
+      href, 
+      text: 'Resume', 
+      primary: true,
+      download: true
+    },
+    {
+      href: `#${SectionId.Contact}`,
+      text: 'Contact',
+      primary: false,
+      download: false,
+    }];
+  const heroData : Hero = {
+   name, 
+   description: bio.split("\n"),
+   actions
+  }
+  return heroData;
+}
+
+export async function getReadmeAndProfileData(username: string) {
+  const user = await getUserInfo(username);
   const raw = await getUserReadMeRawData(username);
-  const about: About = await getAboutData(raw, username);
-  const skills: SkillGroup[] = getSkillsData(raw);
-  return {about, skills};
+  const about: About = await createAboutData(raw, user.id);
+  const skills: SkillGroup[] = createSkillsData(raw);
+  const heroData = await createHeroData(username, user.name, user.bio);
+  return {about, heroData, skills};
   }
