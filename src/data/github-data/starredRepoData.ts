@@ -1,17 +1,14 @@
 import {Octokit} from '@octokit/rest';
 
-// import { Endpoints } from "@octokit/types";
-
-// type listStarredReposParameters = Endpoints["GET /users/{username}/starred"]["parameters"];
-// type listStarredReposResponse = Endpoints["GET /users/{username}/starred"]["response"];
-
 import {PortfolioItem} from '../dataDef';
 import {getRawTaggedData} from './readmeData';
 
 const octokit = new Octokit();
 
 async function requestStarredRepoData(username: string) {
-  const {data} = await octokit.request(`GET /users/${username}/starred`);
+  const {data} = await octokit.rest.activity.listReposStarredByUser({
+    username,
+  });
 
   return data;
 }
