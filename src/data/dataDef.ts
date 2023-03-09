@@ -9,6 +9,7 @@ export interface GithubDataProps {
 
 export interface GithubData {
   about: About;
+  education: TimelineItem[];
   skills: SkillGroup[];
   testimonialSection: TestimonialSection;
 }
@@ -100,7 +101,7 @@ export interface TimelineItem {
   date: string;
   location: string;
   title: string;
-  content: JSX.Element;
+  content: string[];
 }
 
 /**

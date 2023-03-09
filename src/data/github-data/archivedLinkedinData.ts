@@ -1,20 +1,33 @@
 import {Octokit} from "@octokit/rest";
 
-import {Testimonial, TestimonialSection} from "../dataDef";
+import {Testimonial, TestimonialSection, TimelineItem} from "../dataDef";
 
 const octokit = new Octokit();
 
-async function getLinkedinRecommendations(user: string) {
+async function getLinkedinRawData(user: string, path: string) {
   const {data} = await octokit.rest.repos.getContent({
     owner: user,
-    repo: "linkedinData",
-    path: 'Recommendations_Received.csv'
+    repo: user,
+    path: path,
   });
   if("content" in data){
     const content: string = Buffer.from(data.content, 'base64').toString();
     return content;
   } else return "";
 }
+
+
+async function getLinkedinRawRecommendations(user: string) {
+  return getLinkedinRawData(user, "Recommendations_Received.csv");
+}
+
+async function getLinkedinRawEducation(user: string) {
+  return getLinkedinRawData(user, "Education.csv");
+}
+
+// async function getLinkedinRawExperience(user: string) {
+  // return getLinkedinRawData(user, "Positions.csv");
+// }
 
 // Return array of string values, or NULL if CSV string not well formed.
 function csvToArray(text: string) {
@@ -56,14 +69,33 @@ function convertRawCsvToRecordList(raw: string){
   return data;
 }
 
-export async function getLinkedinData(githubUsername: string){
-  let raw : string;
-  try {
-    raw = await getLinkedinRecommendations(githubUsername)
-  } catch (error) {
-    const testimonials :  Testimonial[] = [];
-    return {testimonials}
+async function createEducation_(githubUsername: string){
+  const raw = await getLinkedinRawEducation(githubUsername)
+  console.log(raw);
+  const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
+  const education : TimelineItem[] = [];
+  for (const record of data){
+    education.push({
+      date: record['EndDate'],
+      location: record['SchoolName'],
+      title: record['DegreeName'],
+      content: record['Notes'].split('  ')
+    })
   }
+  return education;
+}
+
+async function createEducation(githubUsername: string){
+  try {
+    return await createEducation_(githubUsername)
+  } catch (error) {
+    const education : TimelineItem[] = []
+    return education;
+  }
+}
+
+async function createTestimonials_(githubUsername: string){
+  const raw = await getLinkedinRawRecommendations(githubUsername)
   const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
   const testimonials : Testimonial[] = [];
   for (const record of data){
@@ -77,4 +109,20 @@ export async function getLinkedinData(githubUsername: string){
   }
   const testimonialSection : TestimonialSection = {testimonials}
   return testimonialSection;
+}
+
+async function createTestimonials(githubUsername: string){
+  try {
+    return await createTestimonials_(githubUsername)
+  } catch (error) {
+    const testimonials :  Testimonial[] = [];
+    const testimonialSection : TestimonialSection = {testimonials}
+    return testimonialSection
+  }
+}
+
+export async function getLinkedinData(githubUsername: string){
+    const testimonialSection = await createTestimonials(githubUsername);
+    const education = await createEducation(githubUsername);
+    return {education, testimonialSection};
 }
