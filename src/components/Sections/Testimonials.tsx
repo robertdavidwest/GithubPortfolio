@@ -26,7 +26,9 @@ const Testimonials: NextPage<GithubData> = memo(({testimonialSection}) => {
 
   const resolveSrc = useMemo(() => {
     if (!imageSrc) return undefined;
-    return typeof imageSrc === 'string' ? imageSrc : imageSrc.src;
+    if (typeof imageSrc === 'string') return imageSrc;
+    const {src} = imageSrc;
+    return src;
   }, [imageSrc]);
 
   // Mobile iOS doesn't allow background-fixed elements
