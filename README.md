@@ -13,7 +13,7 @@ When you run this app in Dev or Prod, data will be automatically pulled from you
 You will just need to make sure that your Github account conforms to the following features and your data will automatically be rendered.
 
 1. Create a user repo: Your Github Account should have a profile landing page. This is achieved by creating a github repo with the same name as your username.
-2. Create a `README.md` file in the repo: In your github user repo you will need a README file. In here you can store information for people to see when they visit your Github page, which is something we suggest you do even if you are not using this Github Portfolio builder.
+2. Create a `README.md` file in the repo: In your github user repo you will need a README file. In here you can store information for people to see when they visit your Github page, which is something we suggest you do even if you are not using this Github Portfolio builder. [Here](https://dev.to/puenehfaith/how-to-beautifully-organize-your-github-profile-dha?ck_subscriber_id=1030950679&utm_source=convertkit&utm_medium=email&utm_campaign=Diversify+Tech+%23221%20-%209810757) is a useful resource for putting that together in general.
 3. Inside the `README.md` add information about yourself, using the following template:
 
    1. Add a **description** of yourself, this will show up in the aboutme section. Place the description between these tags:
@@ -54,9 +54,21 @@ You will just need to make sure that your Github account conforms to the followi
 
    (NOTE: If you don't want to show any of the following information on your Github page but still want it in your Github Portfolio then just put it between html comment tags ! like this: `<-- info here i dont want to show -->`
 
-   ```
+## Upload your Linkedin data to Github (optional)
 
-   ```
+We have also made it possible for you to pull in your Experience, Education and received recommendations from your linked in profile! Unfortunetely LinkedIn does not make this data available via an API. So will need to follow these steps to manually obtain your linkedin data and use it on your website:
+
+1. Follow these instructions from Linkedin to download your data: https://www.linkedin.com/help/linkedin/answer/a1339364 and be sure to select the option to download all data. For the data we need, a download link will become available 10 minutes after you have made the request.
+2. Create a repo on your github profile called `linkedinData`.
+3. Commit these files to the new repo and push them up:
+
+- `Recommendations_Received.csv`
+- `<experience_file_TBD>`
+- `<education_file_TBD>`
+
+That's it! Now the Sections **Experience**, **Education** and **Recommendations** will be populated with your data from linkedin. Anytime you want to refresh your linkedin data just download a new file from linkedin and replace the old one in the `linkedinData` repo.
+
+If you choose not to include linkedin data then these sections will simply be omitted from the portfolio site.
 
 ## Dev Setup
 
