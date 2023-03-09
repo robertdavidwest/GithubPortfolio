@@ -24,7 +24,7 @@ function csvToArray(text: string) {
   if (!re_valid.test(text)) return null;
   const a = [];                     // Initialize array to receive values.
   text.replace(re_value, // "Walk" the string using replace with callback.
-      function(m0, m1, m2, m3) {
+      function(_, m1, m2, m3) {
           // Remove backslash from \' in single quoted values.
           if      (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
           // Remove backslash from \" in double quoted values.
@@ -42,7 +42,6 @@ function convertRawCsvToRecordList(raw: string){
   const header = rawRows[0].split(",");
   const labels : string[] = header.map((x : string) => x.replace(" ", ""));
   const data = [];
-  console.log(raw.split('\n'));
   for (const row of raw.split('\n').slice(1).filter(x=>x!=='')){
     const itemList = csvToArray(row);
     if (!itemList) continue;
@@ -62,7 +61,8 @@ export async function getLinkedinData(githubUsername: string){
   try {
     raw = await getLinkedinRecommendations(githubUsername)
   } catch (error) {
-    return null
+    const testimonials :  Testimonial[] = [];
+    return {testimonials}
   }
   const data : Record<string, string>[] = convertRawCsvToRecordList(raw);
   const testimonials : Testimonial[] = [];

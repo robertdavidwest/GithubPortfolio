@@ -11,7 +11,7 @@ export interface GithubData {
   about: About;
   skills: SkillGroup[];
   portfolioItems: PortfolioItem[];
-  testimonialSection: TestimonialSection | null;
+  testimonialSection: TestimonialSection;
 }
 
 export interface HomepageMeta {
