@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/outline';
 
 import GithubIcon from '../components/Icon/GithubIcon';
+import Icon from '../components/Icon/Icon';
 import InstagramIcon from '../components/Icon/InstagramIcon';
 import LinkedInIcon from '../components/Icon/LinkedInIcon';
 import StackOverflowIcon from '../components/Icon/StackOverflowIcon';
@@ -51,6 +52,18 @@ export function mapLabelToIcon(label: string){
     default : return ;
   }
 }
+
+export function mapSocialToIcon(label: string){
+  switch(label){
+    case 'Github': return GithubIcon;
+    case 'Stack Overflow': return StackOverflowIcon;
+    case 'LinkedIn': return LinkedInIcon;
+    case 'Instagram': return InstagramIcon;
+    case 'Twitter': return TwitterIcon;
+    default: return Icon;
+  }
+}
+
 
 /**
  * Page meta data

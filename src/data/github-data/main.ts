@@ -5,8 +5,9 @@ import {getReadmeAndProfileData} from "./readmeData";
 export async function getAllGithubData(username: string) {
   // Add all function calls here to collect all github data 
   // in one place: 
-  const {about, heroData, skills}= await getReadmeAndProfileData(username);
+  const {about, heroData, socialLinks, skills}= await getReadmeAndProfileData(username);
   const {education, experience, testimonialSection} = await getLinkedinData(username);
-  const githubData : GithubData = {about, education, experience, heroData, skills, testimonialSection};
+  const githubData : GithubData = {about, education, experience, 
+                                   heroData, socialLinks, skills, testimonialSection};
   return githubData;
 }

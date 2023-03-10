@@ -1,10 +1,12 @@
 import {ChevronUpIcon} from '@heroicons/react/outline';
-import {FC, memo} from 'react';
+import {NextPage} from 'next';
+import {memo} from 'react';
 
 import {SectionId} from '../../data/data';
+import {GithubData} from '../../data/dataDef';
 import Socials from '../Socials';
 
-const Footer: FC = memo(() => (
+const Footer: NextPage<GithubData> = memo((githubData) => (
   <div className="relative bg-neutral-900 px-4 pb-6 pt-12 sm:px-8 sm:pt-14 sm:pb-8">
     <div className="absolute inset-x-0 -top-4 flex justify-center sm:-top-6">
       <a
@@ -15,7 +17,7 @@ const Footer: FC = memo(() => (
     </div>
     <div className="flex flex-col items-center gap-y-6">
       <div className="flex gap-x-4 text-neutral-500">
-        <Socials />
+        <Socials {...githubData} />
       </div>
       <span className="text-sm text-neutral-700">© Copyright 2022 Tim Baker</span>
     </div>

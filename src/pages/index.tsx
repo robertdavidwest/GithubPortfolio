@@ -30,7 +30,7 @@ const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
       <Testimonials {...githubData} /> : null
       }
       <Contact />
-      <Footer />
+      <Footer {...githubData}/>
     </Page>
   );
 });

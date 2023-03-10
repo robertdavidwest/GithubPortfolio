@@ -12,6 +12,7 @@ export interface GithubData {
   education: TimelineItem[];
   experience: TimelineItem[];
   heroData: Hero;
+  socialLinks: Social[];
   skills: SkillGroup[];
   testimonialSection: TestimonialSection;
 }
@@ -161,6 +162,6 @@ export interface ContactValue {
  */
 export interface Social {
   label: string;
-  Icon: FC<IconProps>;
+  Icon?: FC<IconProps>;
   href: string;
 }

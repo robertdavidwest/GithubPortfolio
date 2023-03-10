@@ -1,7 +1,7 @@
 import {Octokit} from "@octokit/rest";
 
 import {SectionId} from "../data";
-import {About, AboutItem, Hero, HeroActionItem, Skill, SkillGroup} from "../dataDef";
+import {About, AboutItem, Hero, HeroActionItem, Skill, SkillGroup,Social} from "../dataDef";
 
 const octokit = new Octokit();
 
@@ -141,11 +141,41 @@ async function createHeroData(username: string, name: string, bio: string){
   return heroData;
 }
 
+async function createSocialLinks(username: string){
+  const res = await fetch('https://api.github.com/users/robertdavidwest/social_accounts');
+  const data = await res.json();
+  const socialLinks : Social[] = [
+    {
+      'label': 'Github', href: `https://github.com/${username}`
+    }
+  ];
+  const possibleSocials : Record<string, string> = {
+                           'twitter': 'Twitter', 
+                           'linkedin': 'LinkedIn', 
+                           'instagram': 'Instagram'}
+  for (const item of data){
+    if (item['provider'] in possibleSocials){
+      const key = item['provider'] 
+      const label: string = possibleSocials[key];
+      const href = item['url']
+      socialLinks.push({label, href})
+    }
+    else if (item['url'].includes('stackoverflow')){
+    // stackoverflow shows up in 'generic'
+        const label = 'Stack Overflow' 
+        const href = item['url']
+        socialLinks.push({label, href})
+    }
+  }
+  return socialLinks;
+}
+
 export async function getReadmeAndProfileData(username: string) {
   const user = await getUserInfo(username);
   const raw = await getUserReadMeRawData(username);
   const about: About = await createAboutData(raw, user.id);
   const skills: SkillGroup[] = createSkillsData(raw);
   const heroData = await createHeroData(username, user.name, user.bio);
-  return {about, heroData, skills};
+  const socialLinks = await createSocialLinks(username);
+  return {about, heroData, socialLinks, skills};
   }

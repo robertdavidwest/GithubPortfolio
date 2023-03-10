@@ -2,7 +2,7 @@ import {ChevronDownIcon} from '@heroicons/react/outline';
 import classNames from 'classnames';
 import {NextPage} from 'next';
 import Image from 'next/image';
-import {FC, memo} from 'react';
+import {memo} from 'react';
 
 import {SectionId} from '../../data/data';
 import {GithubData} from '../../data/dataDef';
@@ -10,9 +10,9 @@ import heroImage from '../../images/header-background.webp';
 import Section from '../Layout/Section';
 import Socials from '../Socials';
 
-const Hero: NextPage<GithubData> = memo(({heroData}) => {
+const Hero: NextPage<GithubData> = memo((githubData) => {
   const imageSrc = heroImage;
-  const {name, description, actions} = heroData;
+  const {name, description, actions} = githubData.heroData;
 
   return (
     <Section noPadding sectionId={SectionId.Hero}>
@@ -33,7 +33,7 @@ const Hero: NextPage<GithubData> = memo(({heroData}) => {
               <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg" key={i}>{x}</p>
             ))}
             <div className="flex gap-x-4 text-neutral-100">
-              <Socials />
+              <Socials {...githubData}/>
             </div>
             <div className="flex w-full justify-center gap-x-4">
               {actions.map(({href, text, primary, Icon}) => (
