@@ -43,6 +43,7 @@ function formatAboutMeList(str: string) {
   str = trimEmptyLines(str);
   const aboutItems : AboutItem[] = [];
   const aboutContactItems: ContactItem[] = [];
+  let blogHref : string | null = null;
   for (let item of str.split('\n')) {
     item = item.slice(0, 2) === '- ' ? item.slice(2) : item;
     const [label, text] = item.split(': ');
@@ -67,9 +68,11 @@ function formatAboutMeList(str: string) {
       })
     }
 
-    // do something with blog here
+    // blog
+    if (label === 'Blog') blogHref = text;
+
   }
-  return {aboutItems, aboutContactItems};
+  return {aboutItems, aboutContactItems, blogHref};
 }
 
 function formatRawSkill(str: string){
@@ -112,11 +115,10 @@ async function createAboutData(raw: string, userId: number){
   const rawDescription : string = getRawTaggedData(raw, 'description');
   const descParagraphs: string[] = formatDescription(rawDescription);
   const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
-  const {aboutItems, aboutContactItems } = formatAboutMeList(rawAboutMe);
-  
+  const {aboutItems, aboutContactItems, blogHref} = formatAboutMeList(rawAboutMe);
   const profileImageSrc : string = await getProfileImgSrc(userId);
   const about: About = {descParagraphs, aboutItems, profileImageSrc} ;
-  return {about, aboutContactItems}
+  return {about, aboutContactItems, blogHref}
 }
 
 function createSkillsData(raw: string){
@@ -125,7 +127,7 @@ function createSkillsData(raw: string){
   return skills
 }
 
-async function createHeroData(username: string, name: string, bio: string){
+async function createHeroData(username: string, name: string, bio: string, blogHref: string | null){
   // trt all these hrefs in this order and use the first one that works
   const hrefs = [
   `https://github.com/${username}/${username}/blob/HEAD/resume.pdf`,
@@ -155,6 +157,14 @@ async function createHeroData(username: string, name: string, bio: string){
       primary: false,
       download: false,
     }];
+  if (blogHref){
+    actions.push({
+      href: blogHref,
+      text: 'Blog',
+      primary: false,
+      download: false,
+    })
+  }
   const heroData : Hero = {
    name, 
    description: bio.split("\n"),
@@ -225,9 +235,9 @@ export async function getReadmeAndProfileData(username: string) {
   const user = await getUserInfo(username);
   const raw = await getUserReadMeRawData(username);
 
-  const {about, aboutContactItems} = await createAboutData(raw, user.id);
+  const {about, aboutContactItems, blogHref} = await createAboutData(raw, user.id);
   const skills: SkillGroup[] = createSkillsData(raw);
-  const heroData = await createHeroData(username, user.name, user.bio);
+  const heroData = await createHeroData(username, user.name, user.bio, blogHref);
   const {socialLinks, socialContactItems} = await createSocialLinks(username);
 
   const contactSection : ContactSection = {
