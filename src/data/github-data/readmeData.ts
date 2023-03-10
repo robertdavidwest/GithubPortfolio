@@ -1,7 +1,7 @@
 import {Octokit} from "@octokit/rest";
 
 import {SectionId} from "../data";
-import {About, AboutItem, Hero, HeroActionItem, Skill, SkillGroup,Social} from "../dataDef";
+import {About, AboutItem, ContactItem, ContactSection, ContactType, Hero, HeroActionItem, Skill, SkillGroup,Social} from "../dataDef";
 
 const octokit = new Octokit();
 
@@ -42,12 +42,34 @@ function formatDescription(str: string) {
 function formatAboutMeList(str: string) {
   str = trimEmptyLines(str);
   const aboutItems : AboutItem[] = [];
+  const aboutContactItems: ContactItem[] = [];
   for (let item of str.split('\n')) {
     item = item.slice(0, 2) === '- ' ? item.slice(2) : item;
     const [label, text] = item.split(': ');
-    aboutItems.push({label, text});
+
+    // about items
+    if (!['Email', 'Blog'].includes(label)){
+      aboutItems.push({label, text});
+    }
+
+    // contact items
+    if (label === 'Email'){
+      aboutContactItems.push({
+        type: ContactType.Email,
+        text, 
+        href: `mailto:${text}`
+      })
+    } else if (label === 'Location'){
+      aboutContactItems.push({
+        type: ContactType.Location,
+        text,
+        href: `https://www.google.com/maps/place/${text}/`
+      })
+    }
+
+    // do something with blog here
   }
-  return aboutItems;
+  return {aboutItems, aboutContactItems};
 }
 
 function formatRawSkill(str: string){
@@ -90,11 +112,11 @@ async function createAboutData(raw: string, userId: number){
   const rawDescription : string = getRawTaggedData(raw, 'description');
   const descParagraphs: string[] = formatDescription(rawDescription);
   const rawAboutMe: string = getRawTaggedData(raw, 'aboutme-list')  
-  const aboutItems: AboutItem[] = formatAboutMeList(rawAboutMe);
+  const {aboutItems, aboutContactItems } = formatAboutMeList(rawAboutMe);
   
   const profileImageSrc : string = await getProfileImgSrc(userId);
   const about: About = {descParagraphs, aboutItems, profileImageSrc} ;
-  return about;
+  return {about, aboutContactItems}
 }
 
 function createSkillsData(raw: string){
@@ -144,6 +166,7 @@ async function createHeroData(username: string, name: string, bio: string){
 async function createSocialLinks(username: string){
   const res = await fetch('https://api.github.com/users/robertdavidwest/social_accounts');
   const data = await res.json();
+  
   const socialLinks : Social[] = [
     {
       'label': 'Github', href: `https://github.com/${username}`
@@ -154,28 +177,57 @@ async function createSocialLinks(username: string){
                            'linkedin': 'LinkedIn', 
                            'instagram': 'Instagram'}
   for (const item of data){
+    let label: string;
+    let href: string;
     if (item['provider'] in possibleSocials){
       const key = item['provider'] 
-      const label: string = possibleSocials[key];
-      const href = item['url']
+      label = possibleSocials[key];
+      href = item['url']
       socialLinks.push({label, href})
     }
     else if (item['url'].includes('stackoverflow')){
-    // stackoverflow shows up in 'generic'
-        const label = 'Stack Overflow' 
-        const href = item['url']
-        socialLinks.push({label, href})
+      // stackoverflow shows up in 'generic'
+      label = 'Stack Overflow' 
+      href = item['url']
+      socialLinks.push({label, href})
+    } else {
+      break;
     }
   }
-  return socialLinks;
+
+  // contact items 
+  const socialContactItems: ContactItem[] = [];
+  for (const {label, href} of socialLinks){
+    if (label === 'Github'){
+      socialContactItems.push({
+        type: ContactType.Github,
+        text: href.split("/")[href.split("/").length - 1],
+        href
+      })
+    } else if (label === 'LinkedIn'){
+      socialContactItems.push({
+        type: ContactType.LinkedIn,
+        text: href.split("/")[href.split("/").length - 2],
+        href
+      })
+    } 
+  }
+  return {socialLinks, socialContactItems}
 }
 
 export async function getReadmeAndProfileData(username: string) {
   const user = await getUserInfo(username);
   const raw = await getUserReadMeRawData(username);
-  const about: About = await createAboutData(raw, user.id);
+
+  const {about, aboutContactItems} = await createAboutData(raw, user.id);
   const skills: SkillGroup[] = createSkillsData(raw);
   const heroData = await createHeroData(username, user.name, user.bio);
-  const socialLinks = await createSocialLinks(username);
-  return {about, heroData, socialLinks, skills};
+  const {socialLinks, socialContactItems} = await createSocialLinks(username);
+
+  const contactSection : ContactSection = {
+    headerText: 'Get in touch.',
+    description: "Feel free to get in touch if you'd like to ask me about my work or if you'd like to collaborate on a project together",
+    items: aboutContactItems.concat(socialContactItems),
+  }
+  return {about, contactSection, heroData, socialLinks, skills};
   }
