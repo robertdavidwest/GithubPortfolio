@@ -1,4 +1,4 @@
-import {ChevronDownIcon} from '@heroicons/react/outline';
+import {ChevronDownIcon,  DownloadIcon} from '@heroicons/react/outline';
 import classNames from 'classnames';
 import {NextPage} from 'next';
 import Image from 'next/image';
@@ -13,7 +13,6 @@ import Socials from '../Socials';
 const Hero: NextPage<GithubData> = memo((githubData) => {
   const imageSrc = heroImage;
   const {name, description, actions} = githubData.heroData;
-
   return (
     <Section noPadding sectionId={SectionId.Hero}>
       <div className="relative flex h-screen w-screen items-center justify-center">
@@ -36,8 +35,9 @@ const Hero: NextPage<GithubData> = memo((githubData) => {
               <Socials {...githubData}/>
             </div>
             <div className="flex w-full justify-center gap-x-4">
-              {actions.map(({href, text, primary, Icon}) => (
-                <a
+              {actions.map(({href, text, primary, download, Icon}) => {
+                Icon = download ? DownloadIcon : Icon;
+                return (<a
                   className={classNames(
                     'flex gap-x-2 rounded-full border-2 bg-none py-2 px-4 text-sm font-medium text-white ring-offset-gray-700/80 hover:bg-gray-700/80 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-base',
                     primary ? 'border-orange-500 ring-orange-500' : 'border-white ring-white',
@@ -46,8 +46,8 @@ const Hero: NextPage<GithubData> = memo((githubData) => {
                   key={text}>
                   {text}
                   {Icon && <Icon className="h-5 w-5 text-white sm:h-6 sm:w-6" />}
-                </a>
-              ))}
+                </a>)
+                 })}
             </div>
           </div>
         </div>
