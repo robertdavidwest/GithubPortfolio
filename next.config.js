@@ -28,7 +28,7 @@ const nextConfig = {
   swcMinify: true,
   trailingSlash: false,
   images: {
-    domains: ['avatars.githubusercontent.com', 'hips.hearstapps.com'],
+    domains: ['avatars.githubusercontent.com', 'raw.githubusercontent.com', 'octodex.github.com'],
   },
 };
 

@@ -6,7 +6,7 @@ import {FC, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 're
 
 import {isMobile} from '../../config';
 import {SectionId} from '../../data/data';
-import {PortfolioItem, GithubData} from '../../data/dataDef';
+import {GithubData,PortfolioItem} from '../../data/dataDef';
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick';
 import Section from '../Layout/Section';
 
@@ -25,7 +25,7 @@ const Portfolio: NextPage<GithubData> = memo(({portfolioItems}) => {
                     'relative h-max w-full overflow-hidden rounded-lg shadow-lg shadow-black/30 lg:shadow-xl',
                   )}>
                   {/* <Image alt={title} layout="responsive" placeholder="blur" src={image} /> */}
-                  <Image alt={title} height="420px" width="420px" src={image} />
+                  <Image alt={title} height="420px" src={image} width="420px" />
                   <ItemOverlay item={item} />
                 </div>
               </div>
