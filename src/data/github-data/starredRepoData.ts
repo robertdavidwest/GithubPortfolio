@@ -15,7 +15,10 @@ async function formatPortfolioItems(data: any[]) {
   const portfolioItems: PortfolioItem[] = [];
 
   for (const repo of data) {
-    const imgUrl = `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/HEAD/app-screenshot.png`
+    let imgUrl = `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/HEAD/app-screenshot.png`
+    const defaultImageUrl = 'https://octodex.github.com/images/droidtocat.png';
+    const response = await fetch(imgUrl);
+    if (!(response.status===200)) imgUrl = defaultImageUrl;
 
     const portfolioItemData: PortfolioItem = {
       title: repo.name,
