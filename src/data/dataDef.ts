@@ -14,6 +14,7 @@ export interface GithubData {
   heroData: Hero;
   socialLinks: Social[];
   skills: SkillGroup[];
+  portfolioItems: PortfolioItem[];
   testimonialSection: TestimonialSection;
 }
 
