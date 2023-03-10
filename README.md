@@ -54,19 +54,24 @@ You will just need to make sure that your Github account conforms to the followi
 
    (NOTE: If you don't want to show any of the following information on your Github page but still want it in your Github Portfolio then just put it between html comment tags ! like this: `<-- info here i dont want to show -->`
 
+4. Upload your resume to github in one of either of these locations (if you have data in both them number 1 will be selected):
+
+   1. `https://github.com/<username>/<username>/blob/main/resume.pdf` (note: `main` or `master` will work fine)
+   2. `https://github.com/<username>/resume/blob/main/resume.pdf` (note: `main` or `master` will work fine)
+
 ## Upload your Linkedin data to Github (optional)
 
 We have also made it possible for you to pull in your Experience, Education and received recommendations from your linked in profile! Unfortunetely LinkedIn does not make this data available via an API. So will need to follow these steps to manually obtain your linkedin data and use it on your website:
 
 1. Follow these instructions from Linkedin to download your data: https://www.linkedin.com/help/linkedin/answer/a1339364 and be sure to select the option to download all data. For the data we need, a download link will become available 10 minutes after you have made the request.
-2. Create a repo on your github profile called `linkedinData`.
-3. Commit these files to the new repo and push them up:
+2. Download the data and unzip the file.
+3. Commit the following files to repo that you already created: `<your-username>`:
 
 - `Recommendations_Received.csv`
-- `<experience_file_TBD>`
-- `<education_file_TBD>`
+- `Positions.csv`
+- `Education.csv`
 
-That's it! Now the Sections **Experience**, **Education** and **Recommendations** will be populated with your data from linkedin. Anytime you want to refresh your linkedin data just download a new file from linkedin and replace the old one in the `linkedinData` repo.
+That's it! Now the Sections **Experience**, **Education** and **Recommendations** will be populated with your data from linkedin. Anytime you want to refresh your linkedin data just download a new file from linkedin and replace the old one in the `<your-username>` repo.
 
 If you choose not to include linkedin data then these sections will simply be omitted from the portfolio site.
 

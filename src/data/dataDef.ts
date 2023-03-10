@@ -9,6 +9,9 @@ export interface GithubDataProps {
 
 export interface GithubData {
   about: About;
+  education: TimelineItem[];
+  experience: TimelineItem[];
+  heroData: Hero;
   skills: SkillGroup[];
   portfolioItems: PortfolioItem[];
   testimonialSection: TestimonialSection;
@@ -32,16 +35,17 @@ export interface HomepageMeta {
  * Hero section
  */
 export interface Hero {
-  imageSrc: string;
+  imageSrc?: string;
   name: string;
-  description: JSX.Element;
+  description: string[];
   actions: HeroActionItem[];
 }
 
-interface HeroActionItem {
+export interface HeroActionItem {
   href: string;
   text: string;
   primary?: boolean;
+  download: boolean;
   Icon?: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 }
 
@@ -101,7 +105,7 @@ export interface TimelineItem {
   date: string;
   location: string;
   title: string;
-  content: JSX.Element;
+  content: string[];
 }
 
 /**

@@ -79,33 +79,27 @@ export type SectionId = typeof SectionId[keyof typeof SectionId];
 /**
  * Hero section
  */
+
+      // '<p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
 export const heroData: Hero = {
   imageSrc: heroImage,
   name: `I'm Tim Baker.`,
-  description: (
-    <>
-      <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        I'm a Victoria based <strong className="text-stone-100">Full Stack Software Engineer</strong>, currently working
-        at <strong className="text-stone-100">Instant Domains</strong> helping build a modern, mobile-first, domain
-        registrar and site builder.
-      </p>
-      <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time time, you can catch me training in <strong className="text-stone-100">Muay Thai</strong>,
-        plucking my <strong className="text-stone-100">banjo</strong>, or exploring beautiful{' '}
-        <strong className="text-stone-100">Vancouver Island</strong>.
-      </p>
-    </>
-  ),
+  description: [
+        "I'm a Victoria based Full Stack Software Engineer, currently working at Instant Domains helping build a modern, mobile-first, domain registrar and site builder.",
+        "In my free time time, you can catch me training in Muay Thai, plucking my banjo, or exploring beautiful Vancouver Island."
+  ],
   actions: [
     {
       href: '/assets/resume.pdf',
       text: 'Resume',
       primary: true,
+      download: true,
       Icon: DownloadIcon,
     },
     {
       href: `#${SectionId.Contact}`,
       text: 'Contact',
+      download: false,
       primary: false,
     },
   ],
@@ -283,13 +277,13 @@ export const education: TimelineItem[] = [
     date: 'April 2007',
     location: 'Clown college',
     title: 'Masters in Beer tasting',
-    content: <p>Describe your experience at school, what you learned, what useful skills you have acquired etc.</p>,
+    content: ['Describe your experience at school, what you learned, what useful skills you have acquired etc.']
   },
   {
     date: 'March 2003',
     location: 'School of Business',
     title: 'What did you study 101',
-    content: <p>Describe your experience at school, what you learned, what useful skills you have acquired etc.</p>,
+    content: ['Describe your experience at school, what you learned, what useful skills you have acquired etc.']
   },
 ];
 
@@ -299,10 +293,7 @@ export const experience: TimelineItem[] = [
     location: 'Awesome Development Company',
     title: 'Senior UX Engineer',
     content: (
-      <p>
-        Describe work, special projects, notable achievements, what technologies you have been working with, and
-        anything else that would be useful for an employer to know.
-      </p>
+      ['Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know.']
     ),
   },
   {
@@ -310,10 +301,7 @@ export const experience: TimelineItem[] = [
     location: 'Garage Startup Studio',
     title: 'Junior bug fixer',
     content: (
-      <p>
-        Describe work, special projects, notable achievements, what technologies you have been working with, and
-        anything else that would be useful for an employer to know.
-      </p>
+      ['Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know.']
     ),
   },
 ];
