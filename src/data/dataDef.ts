@@ -9,6 +9,7 @@ export interface GithubDataProps {
 
 export interface GithubData {
   about: About;
+  contactSection: ContactSection;
   education: TimelineItem[];
   experience: TimelineItem[];
   heroData: Hero;

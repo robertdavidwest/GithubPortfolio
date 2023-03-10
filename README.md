@@ -40,7 +40,19 @@ You will just need to make sure that your Github account conforms to the followi
       (NOTE1: You can omit any of these categories and everything will still work)
       (NOTE2: You can add any custom categories, they will just show up without a logo)
 
-   3. Add a list of **skills** and **levels**, copy the format below:
+   3. You can also include both **blog** and an **email** address on your site by including them in the about me section:
+
+      ```
+      <!-- aboutme-list-start -->
+      .
+      .
+      .
+      - Email: <your-email-address>
+      - Blog: <https://www.yourblog.com>
+      <!-- aboutme-list-end -->
+      ```
+
+   4. Add a list of **skills** and **levels**, copy the format below:
 
       ```
       <!-- skills-start -->
