@@ -164,7 +164,7 @@ async function createHeroData(username: string, name: string, bio: string){
 }
 
 async function createSocialLinks(username: string){
-  const res = await fetch('https://api.github.com/users/robertdavidwest/social_accounts');
+  const res = await fetch(`https://api.github.com/users/${username}/social_accounts`);
   const data = await res.json();
   
   const socialLinks : Social[] = [
@@ -208,6 +208,12 @@ async function createSocialLinks(username: string){
       socialContactItems.push({
         type: ContactType.LinkedIn,
         text: href.split("/")[href.split("/").length - 2],
+        href
+      })
+    } else if (label === 'Twitter'){
+      socialContactItems.push({
+        type: ContactType.Twitter,
+        text: href.split("/")[href.split("/").length - 1],
         href
       })
     } 
