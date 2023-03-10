@@ -1,15 +1,16 @@
 import {ExternalLinkIcon} from '@heroicons/react/outline';
 import classNames from 'classnames';
+import {NextPage} from 'next';
 import Image from 'next/image';
 import {FC, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
 
 import {isMobile} from '../../config';
-import {portfolioItems, SectionId} from '../../data/data';
-import {PortfolioItem} from '../../data/dataDef';
+import {SectionId} from '../../data/data';
+import {PortfolioItem, GithubData} from '../../data/dataDef';
 import useDetectOutsideClick from '../../hooks/useDetectOutsideClick';
 import Section from '../Layout/Section';
 
-const Portfolio: FC = memo(() => {
+const Portfolio: NextPage<GithubData> = memo(({portfolioItems}) => {
   return (
     <Section className="bg-neutral-800" sectionId={SectionId.Portfolio}>
       <div className="flex flex-col gap-y-8">
@@ -23,7 +24,8 @@ const Portfolio: FC = memo(() => {
                   className={classNames(
                     'relative h-max w-full overflow-hidden rounded-lg shadow-lg shadow-black/30 lg:shadow-xl',
                   )}>
-                  <Image alt={title} layout="responsive" placeholder="blur" src={image} />
+                  {/* <Image alt={title} layout="responsive" placeholder="blur" src={image} /> */}
+                  <Image alt={title} height="420px" width="420px" src={image} />
                   <ItemOverlay item={item} />
                 </div>
               </div>

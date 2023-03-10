@@ -21,7 +21,7 @@ async function getUserReadMeRawData(user: string) {
   return  getRawFile(user, user, 'README.md');
 }
 
-function getRawTaggedData(str: string, tagName: string) {
+export function getRawTaggedData(str: string, tagName: string) {
   let data;
   const openTag = `<!-- ${tagName}-start -->`;
   const closeTag = `<!-- ${tagName}-end -->`;

@@ -13,6 +13,7 @@ export interface GithubData {
   experience: TimelineItem[];
   heroData: Hero;
   skills: SkillGroup[];
+  portfolioItems: PortfolioItem[];
   testimonialSection: TestimonialSection;
 }
 
