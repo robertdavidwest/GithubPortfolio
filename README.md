@@ -1,8 +1,12 @@
 # Github Portfolio
 
+Turn your Github Profile into a beautifully rendered Portfolio website in minutes for Free!
+
+![app-screenshot.png](app-screenshot.png)
+
 This project is a fork of the excellent [React JS Resume Project](https://github.com/tbakerx/react-resume-template) by [Tim Baker](https://github.com/tbakerx).
 
-Team Alphaca has taken Tim's React App and automated the Data Ingestion from Github. Any dev can now very quickly and easily turn their existing Github account into a beautifully rendered Portfolio website!
+Team [Alphacas](https://github.com/alphacas) ([Chris Jung](https://github.com/cjung14), [Edmund He](https://github.com/EddieFahrenheit) and [Robert West](https://github.com/robertdavidwest)) have taken Tim's React App and automated the Data Ingestion from Github. Anyone can now very quickly and easily turn their existing Github account into a beautifully rendered Portfolio website!
 
 ## How it works
 
