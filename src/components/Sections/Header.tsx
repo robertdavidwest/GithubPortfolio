@@ -12,7 +12,7 @@ import {useNavObserver} from '../../hooks/useNavObserver';
 export const headerID = 'headerNav';
 
 const Header: NextPage<GithubData> = memo(({heroData}) => {
-  const blogHref = heroData.actions.filter(x=>x.text==='Blog')[0].href;
+  const blogHref = heroData.actions.filter(x => x.text === 'Blog')[0]?.href;
 
   const [currentSection, setCurrentSection] = useState<SectionId | null>(null);
   const navSections = useMemo(
@@ -34,7 +34,7 @@ const Header: NextPage<GithubData> = memo(({heroData}) => {
   );
 });
 
-const DesktopNav: FC<{navSections: SectionId[]; currentSection: SectionId | null, blogHref : string | null}> = memo(
+const DesktopNav: FC<{navSections: SectionId[]; currentSection: SectionId | null; blogHref: string | null}> = memo(
   ({navSections, currentSection, blogHref}) => {
     const baseClass =
       '-m-1.5 p-1.5 rounded-md font-bold first-letter:uppercase hover:transition-colors hover:duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 sm:hover:text-orange-500 text-neutral-100';
@@ -52,11 +52,11 @@ const DesktopNav: FC<{navSections: SectionId[]; currentSection: SectionId | null
               section={section}
             />
           ))}
-          {blogHref?
+          {blogHref ? (
             <Link href={blogHref} passHref>
-              <a className={classNames(inactiveClass)} >Blog</a>
+              <a className={classNames(inactiveClass)}>Blog</a>
             </Link>
-            : null}
+          ) : null}
         </nav>
       </header>
     );
