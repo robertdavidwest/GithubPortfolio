@@ -28,7 +28,7 @@ const Header: NextPage<GithubData> = memo(({heroData}) => {
 
   return (
     <>
-      <MobileNav currentSection={currentSection} navSections={navSections} />
+      <MobileNav blogHref={blogHref} currentSection={currentSection} navSections={navSections} />
       <DesktopNav blogHref={blogHref} currentSection={currentSection} navSections={navSections} />
     </>
   );
@@ -63,8 +63,8 @@ const DesktopNav: FC<{navSections: SectionId[]; currentSection: SectionId | null
   },
 );
 
-const MobileNav: FC<{navSections: SectionId[]; currentSection: SectionId | null}> = memo(
-  ({navSections, currentSection}) => {
+const MobileNav: FC<{navSections: SectionId[]; currentSection: SectionId | null; blogHref: string | null}> = memo(
+  ({navSections, currentSection, blogHref}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const toggleOpen = useCallback(() => {
@@ -116,6 +116,11 @@ const MobileNav: FC<{navSections: SectionId[]; currentSection: SectionId | null}
                       section={section}
                     />
                   ))}
+                  {blogHref ? (
+                    <Link href={blogHref} passHref>
+                      <a className={classNames(inactiveClass)}>Blog</a>
+                    </Link>
+                  ) : null}
                 </nav>
               </div>
             </Transition.Child>
