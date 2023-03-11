@@ -73,10 +73,7 @@ You will just need to make sure that your Github account conforms to the followi
 
 5. Star repositories that you would like to have featured in the "Portfolio" section of the website.
    1. Add a description and a website url (you can link the repository if it is not a web based project). This can be done in the about tab of the repository.
-   2. In the 'README.md' of the starred repository, add an image url in the same format as the previous setup steps.
-      ```
-      <!-- imgUrl-start -->insert image url here<!-- imgUrl-end -->
-      ```
+   2. Add a file in your repository called 'app-screenshot.png' with an image that you would like to have featured on the website
 
 ## Upload your Linkedin data to Github (optional)
 
