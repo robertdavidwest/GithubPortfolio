@@ -21,7 +21,7 @@ const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
   const {title, description} = homePageMeta;
   return (
     <Page description={description} title={title}>
-      <Header />
+      <Header {...githubData} />
       <Hero {...githubData}/>
       <About {...githubData} />
       <Resume {...githubData} />
