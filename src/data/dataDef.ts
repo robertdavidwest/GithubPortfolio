@@ -96,7 +96,8 @@ export interface SkillGroup {
 export interface PortfolioItem {
   title: string;
   description: string;
-  url: string;
+  githubUrl: string;
+  siteUrl?: string;
   image: string | StaticImageData;
 }
 

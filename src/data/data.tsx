@@ -41,29 +41,41 @@ import {
   TimelineItem,
 } from './dataDef';
 
-export function mapLabelToIcon(label: string){
-  switch(label){
-    case 'Age': return CalendarIcon;
-    case 'Employment': return OfficeBuildingIcon;
-    case 'Interests': return SparklesIcon;
-    case 'Location' : return MapIcon;
-    case 'Nationality': return FlagIcon;
-    case 'Study': return AcademicCapIcon;
-    default : return ;
+export function mapLabelToIcon(label: string) {
+  switch (label) {
+    case 'Age':
+      return CalendarIcon;
+    case 'Employment':
+      return OfficeBuildingIcon;
+    case 'Interests':
+      return SparklesIcon;
+    case 'Location':
+      return MapIcon;
+    case 'Nationality':
+      return FlagIcon;
+    case 'Study':
+      return AcademicCapIcon;
+    default:
+      return;
   }
 }
 
-export function mapSocialToIcon(label: string){
-  switch(label){
-    case 'Github': return GithubIcon;
-    case 'Stack Overflow': return StackOverflowIcon;
-    case 'LinkedIn': return LinkedInIcon;
-    case 'Instagram': return InstagramIcon;
-    case 'Twitter': return TwitterIcon;
-    default: return Icon;
+export function mapSocialToIcon(label: string) {
+  switch (label) {
+    case 'Github':
+      return GithubIcon;
+    case 'Stack Overflow':
+      return StackOverflowIcon;
+    case 'LinkedIn':
+      return LinkedInIcon;
+    case 'Instagram':
+      return InstagramIcon;
+    case 'Twitter':
+      return TwitterIcon;
+    default:
+      return Icon;
   }
 }
-
 
 /**
  * Page meta data
@@ -93,13 +105,13 @@ export type SectionId = typeof SectionId[keyof typeof SectionId];
  * Hero section
  */
 
-      // '<p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
+// '<p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
 export const heroData: Hero = {
   imageSrc: heroImage,
   name: `I'm Tim Baker.`,
   description: [
-        "I'm a Victoria based Full Stack Software Engineer, currently working at Instant Domains helping build a modern, mobile-first, domain registrar and site builder.",
-        "In my free time time, you can catch me training in Muay Thai, plucking my banjo, or exploring beautiful Vancouver Island."
+    "I'm a Victoria based Full Stack Software Engineer, currently working at Instant Domains helping build a modern, mobile-first, domain registrar and site builder.",
+    'In my free time time, you can catch me training in Muay Thai, plucking my banjo, or exploring beautiful Vancouver Island.',
   ],
   actions: [
     {
@@ -123,9 +135,11 @@ export const heroData: Hero = {
  */
 export const aboutData: About = {
   profileImageSrc: profilepic,
-  descParagraphs: [`Use this bio section as your way of describing yourself and saying what you do, what technologies you like
+  descParagraphs: [
+    `Use this bio section as your way of describing yourself and saying what you do, what technologies you like
   to use or feel most comfortable with, describing your personality, or whatever else you feel like throwing
-  in.`],
+  in.`,
+  ],
   aboutItems: [
     {label: 'Location', text: 'Victoria, BC', Icon: MapIcon},
     {label: 'Age', text: '29', Icon: CalendarIcon},
@@ -217,67 +231,78 @@ export const portfolioItems: PortfolioItem[] = [
   {
     title: 'Project title 1',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage1,
   },
   {
     title: 'Project title 2',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage2,
   },
   {
     title: 'Project title 3',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage3,
   },
   {
     title: 'Project title 4',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage4,
   },
   {
     title: 'Project title 5',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage5,
   },
   {
     title: 'Project title 6',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage6,
   },
   {
     title: 'Project title 7',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage7,
   },
   {
     title: 'Project title 8',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage8,
   },
   {
     title: 'Project title 9',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage9,
   },
   {
     title: 'Project title 10',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage10,
   },
   {
     title: 'Project title 11',
     description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    githubUrl: 'https://github.com/tbakerx/Tim-Baker-Personal-Website',
+    siteUrl: 'https://timbaker.me',
     image: porfolioImage11,
   },
 ];
@@ -290,13 +315,13 @@ export const education: TimelineItem[] = [
     date: 'April 2007',
     location: 'Clown college',
     title: 'Masters in Beer tasting',
-    content: ['Describe your experience at school, what you learned, what useful skills you have acquired etc.']
+    content: ['Describe your experience at school, what you learned, what useful skills you have acquired etc.'],
   },
   {
     date: 'March 2003',
     location: 'School of Business',
     title: 'What did you study 101',
-    content: ['Describe your experience at school, what you learned, what useful skills you have acquired etc.']
+    content: ['Describe your experience at school, what you learned, what useful skills you have acquired etc.'],
   },
 ];
 
@@ -305,17 +330,17 @@ export const experience: TimelineItem[] = [
     date: 'March 2010 - Present',
     location: 'Awesome Development Company',
     title: 'Senior UX Engineer',
-    content: (
-      ['Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know.']
-    ),
+    content: [
+      'Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know.',
+    ],
   },
   {
     date: 'March 2007 - February 2010',
     location: 'Garage Startup Studio',
     title: 'Junior bug fixer',
-    content: (
-      ['Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know.']
-    ),
+    content: [
+      'Describe work, special projects, notable achievements, what technologies you have been working with, and anything else that would be useful for an employer to know.',
+    ],
   },
 ];
 
