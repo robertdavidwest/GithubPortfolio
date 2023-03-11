@@ -71,6 +71,13 @@ You will just need to make sure that your Github account conforms to the followi
    1. `https://github.com/<username>/<username>/blob/main/resume.pdf` (note: `main` or `master` will work fine)
    2. `https://github.com/<username>/resume/blob/main/resume.pdf` (note: `main` or `master` will work fine)
 
+5. Star repositories that you would like to have featured in the "Portfolio" section of the website.
+   1. Add a description and a website url (you can link the repository if it is not a web based project). This can be done in the about tab of the repository.
+   2. In the 'README.md' of the starred repository, add an image url in the same format as the previous setup steps.
+      ```
+      <!-- imgUrl-start -->insert image url here<!-- imgUrl-end -->
+      ```
+
 ## Upload your Linkedin data to Github (optional)
 
 We have also made it possible for you to pull in your Experience, Education and received recommendations from your linked in profile! Unfortunetely LinkedIn does not make this data available via an API. So will need to follow these steps to manually obtain your linkedin data and use it on your website:
