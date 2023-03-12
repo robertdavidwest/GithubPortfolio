@@ -97,9 +97,9 @@ That's it! Now the Sections **Experience**, **Education** and **Recommendations*
 
 If you choose not to include linkedin data then these sections will simply be omitted from the portfolio site.
 
-## Dev Setup
+## Environemt Variables
 
-You will need to create an environment file called `.env` and add your github user account to the file:
+You will need a single environment variables to run the app in `dev` or `prod`. In dev you will need to create an environment file called `.env` and add your github user account to the file:
 
 ```
 # .env
@@ -110,21 +110,15 @@ GITHUB_USERNAME=<your-username>
 
 Now that your Github account is configured correctly, follow the steps below to set up your Portfolio website!
 
-Below see the original README from Tim's project:
+## Dev Setup
 
-#### If this template has helped you and you'd like to support Tim's work, the original template creator, feel free to [♥️ Sponsor](https://github.com/sponsors/tbakerx) his project
-
-## Description
-
-This is a React based personal resume website template. Built with typescript on the Next.js framework, styled with Tailwind css, and populated with data from a single file, you can easily create, customize and host your own personal website in minutes. Even better, the site is fully mobile-optimized and server-side rendered to ensure fast loading and a clean UI on any device. Read on to learn how to make it your own.
-
-## Make it Your Own!
+We advise running the application in local development before you launch, just to make sure the data layoutl looks as you expect. You can also then make personal customizations if you wish.
 
 ### 1. Make sure you have what you need
 
 To build this website, you will need to have the latest stable versions of Node and Yarn downloaded and installed on your machine. If you don't already have them, you can get Node [here,](https://nodejs.org/en/download/) and Yarn [here.](https://yarnpkg.com/getting-started/install)
 
-### 2. Fork and download this repo (and star if you like!)
+### 2. Fork and download this repo
 
 Next, find the `Fork` button in the top right of this page. This will allow you to make your own copy, for more info on forking repo's see [here.](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) After this, download to your development machine using the green `Code` button at the top of the repo page.
 
@@ -132,34 +126,24 @@ Next, find the `Fork` button in the top right of this page. This will allow you 
 
 Once you have your own copy of this repo forked and downloaded, open the folder in your favorite terminal and run `yarn install` to install dependencies. Following this, run `yarn dev` to run the project. In your terminal you should be given the url of the running instance (usually http://localhost:3000 unless you have something else running).
 
-### 4. Customize the data to make it your own
-
-All of the data for the site is driven via a file at `/src/data/data.tsx`. This is where you'll find the existing content, and updating the values here will be reflected on the site. If you have the site running as described above, you should see these changes reflected on save. The data types for all of these items are given in the same folder in the `dataDef.ts` file. Example images can be found at `src/images/` and are imported in the data file. To change, simply update these images using the same name and location, or add new images and update the imports.
-
-### 5. Hook up contact form
-
-Due to the variety of options available for contact form providers, I've hooked up the contact form only so far as handling inputs and state. Form submission and the actual sending of the email is open to your own implementation. My personal recommendation for email provider is [Sendgrid.](https://sendgrid.com/)
-
-### 6. Make any other changes you like
+### 4. Make any other changes you like
 
 Of course, all of the code is there and nothing is hidden from you so if you would like to make any other styling/data changes, feel free!
 
-### 7. Deploy to Vercel and enjoy your new Resume Website
+## Deployment
+
+Deploy to Vercel and enjoy your new Resume Website
 
 Deploying your new site to Vercel is simple, and can be done by following their guide [here.](https://vercel.com/guides/deploying-nextjs-with-vercel) When you're all done and the build succeeds, you should be given a url for your live site, go there and you'll see your new personal resume website! Congratulations!
 
+Whenever you make changes in your Github account, the changes will automatically flow thru to your new website.
+
 ## Project Created & Maintained By
 
-### Tim Baker
+[Chris Jung](https://github.com/cjung14), [Edmund He](https://github.com/EddieFahrenheit) and [Robert West](https://github.com/robertdavidwest)
 
-<a href="https://twitter.com/timbakerx"><img src="https://github.com/aritraroy/social-icons/blob/master/twitter-icon.png?raw=true" width="60"></a><a href="https://instagram.com/tbakerx"><img src="https://github.com/aritraroy/social-icons/blob/master/instagram-icon.png?raw=true" width="60"></a>
+## Original Project created by :
 
-[![GitHub followers](https://img.shields.io/github/followers/tbakerx.svg?style=social&label=Follow)](https://github.com/tbakerx/)
+[Tim Baker](https://github.com/timbakerx)
 
-## Stargazers
-
-[![Stargazers repo roster for @tbakerx/react-resume-template](https://reporoster.com/stars/dark/tbakerx/react-resume-template)](https://github.com/tbakerx/react-resume-template/stargazers)
-
-## Forkers
-
-[![Forkers repo roster for @tbakerx/react-resume-template](https://reporoster.com/forks/dark/tbakerx/react-resume-template)](https://github.com/tbakerx/react-resume-template/network/members)
+#### If this template has helped you and you'd like to support Tim's work, the original template creator, feel free to [♥️ Sponsor](https://github.com/sponsors/tbakerx) his project
