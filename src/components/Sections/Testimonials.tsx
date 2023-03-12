@@ -18,6 +18,7 @@ const Testimonials: NextPage<GithubData> = memo(({testimonialSection}) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [scrollValue, setScrollValue] = useState(0);
   const [parallaxEnabled, setParallaxEnabled] = useState(false);
+  const [dontMove, setDontMove] = useState(false);
 
   const itemWidth = useRef(0);
   const scrollContainer = useRef<HTMLDivElement>(null);
@@ -56,12 +57,14 @@ const Testimonials: NextPage<GithubData> = memo(({testimonialSection}) => {
     [],
   );
   const next = useCallback(() => {
+    if (dontMove) return;
+
     if (activeIndex + 1 === testimonials.length) {
       setTestimonial(0)();
     } else {
       setTestimonial(activeIndex + 1)();
     }
-  }, [activeIndex, setTestimonial, testimonials.length]);
+  }, [activeIndex, setTestimonial, testimonials.length, dontMove]);
 
   const handleScroll = useCallback<UIEventHandler<HTMLDivElement>>(event => {
     setScrollValue(event.currentTarget.scrollLeft);
@@ -87,6 +90,8 @@ const Testimonials: NextPage<GithubData> = memo(({testimonialSection}) => {
           <div className="flex flex-col items-center gap-y-6 rounded-xl bg-gray-800/60 p-6 shadow-lg">
             <div
               className="no-scrollbar flex w-full touch-pan-x snap-x snap-mandatory gap-x-6 overflow-x-auto scroll-smooth"
+              onMouseEnter={() => setDontMove(true)}
+              onMouseLeave={() => setDontMove(false)}
               onScroll={handleScroll}
               ref={scrollContainer}>
               {testimonials.map((testimonial, index) => {
@@ -123,6 +128,18 @@ const Testimonial: FC<{testimonial: Testimonial; isActive: boolean}> = memo(
     name = title ? `${name}, ${title}` : name;
     name = company ? `${name} at ${company}` : name;
 
+    const textArr = text.split('.');
+    const previewLen = Math.min(2, textArr.length);
+    let textPreview: string | null;
+    let textRemain: string | null;
+    if (textArr.length <= 2) {
+      textPreview = null;
+      textRemain = null;
+    } else {
+      textPreview = textArr.slice(0, previewLen).join('.') + '...';
+      textRemain = '...' + textArr.slice(previewLen).join('.');
+    }
+
     return (
       <div
         className={classNames(
@@ -138,7 +155,22 @@ const Testimonial: FC<{testimonial: Testimonial; isActive: boolean}> = memo(
           <QuoteIcon className="h-5 w-5 shrink-0 text-white sm:h-8 sm:w-8" />
         )}
         <div className="flex flex-col gap-y-4">
-          <p className="prose prose-sm font-medium italic text-white sm:prose-base">{text}</p>
+          {textPreview ? (
+            <div className="group">
+              <div className="group-hover:hidden">
+                <p className="prose prose-sm font-medium italic text-white sm:prose-base">{textPreview}</p>
+              </div>
+              <div className="hidden group-hover:flex">
+                <div>
+                  <p className="prose prose-sm font-medium italic text-white sm:prose-base">{textPreview}</p>
+                  <br />
+                  <p className="font-medium italic text-white">{textRemain}</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <p className="prose prose-sm font-medium italic text-white sm:prose-base">{text}</p>
+          )}
           <p className="text-xs italic text-white sm:text-sm md:text-base lg:text-lg">-- {name}</p>
         </div>
       </div>
