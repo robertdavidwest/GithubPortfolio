@@ -6,6 +6,8 @@ Turn your Github Profile into a beautifully rendered Portfolio website in minute
 
 This project is a fork of the excellent [React JS Resume Project](https://github.com/tbakerx/react-resume-template) by [Tim Baker](https://github.com/tbakerx).
 
+This is a React based personal resume website template. Built with typescript on the Next.js framework, styled with Tailwind css. We have made modifications on top of Tim's template to make this design robust to different information sets that may be found in each person's github account.
+
 Team [Alphacas](https://github.com/alphacas) ([Chris Jung](https://github.com/cjung14), [Edmund He](https://github.com/EddieFahrenheit) and [Robert West](https://github.com/robertdavidwest)) have taken Tim's React App and automated the Data Ingestion from Github. Anyone can now very quickly and easily turn their existing Github account into a beautifully rendered Portfolio website!
 
 ## How it works
@@ -104,49 +106,13 @@ You will need to create an environment file called `.env` and add your github us
 GITHUB_USERNAME=<your-username>
 ```
 
-## Github Account Configuration for the project
-
-to be written...
+## Thats it!
 
 Now that your Github account is configured correctly, follow the steps below to set up your Portfolio website!
 
 Below see the original README from Tim's project:
 
-# React JS Resume Website Template
-
-![ReactJS Resume Website Template](resume-screenshot.jpg?raw=true 'ReactJS Resume Website Template')
-
-<div align="center">
-
-<img alt="GitHub release (latest by date including pre-releases" src="https://img.shields.io/github/v/release/tbakerx/react-resume-template?include_prereleases">
-
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/tbakerx/react-resume-template?style=flat">
-
-<img alt="GitHub Repo forks" src="https://img.shields.io/github/forks/tbakerx/react-resume-template?style=flat&color=success">
-
-<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/tbakerx/react-resume-template?style=flat&color=yellow">
-
-<img alt="GitHub package.json dependency version (prod)" src="https://img.shields.io/github/package-json/dependency-version/tbakerx/react-resume-template/react?style=flat">
-
-<img alt="Github Repo Sponsors" src="https://img.shields.io/github/sponsors/tbakerx?style=flat&color=blueviolet">
-
-## React based template for software developer-focused resume websites
-
-</div>
-
-### View a [live demo here.](https://reactresume.com)
-
-#### If this template has helped you and you'd like to support my work, feel free to [♥️ Sponsor](https://github.com/sponsors/tbakerx) the project
-
-### 🎉 Version 2 is here! New features:
-
-1. Completely rebuilt with React and full typescript support
-2. Built on the [Next.js](https://nextjs.org/) framework for easy server side rendering/static generation, image optimization, api routes, and deployment
-3. Styled entirely with [TailwindCss](https://tailwindcss.com/)
-4. Re-organized data population file for customizing site.
-5. Significant improvement/modernization of all site sections
-
-**Looking for the old version? You can find it [here.](https://github.com/tbakerx/react-resume-template/releases/tag/v1.0.0)**
+#### If this template has helped you and you'd like to support Tim's work, the original template creator, feel free to [♥️ Sponsor](https://github.com/sponsors/tbakerx) his project
 
 ## Description
 
