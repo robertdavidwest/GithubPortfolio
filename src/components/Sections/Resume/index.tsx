@@ -1,6 +1,6 @@
 import {NextPage} from 'next';
-import {memo, useCallback, useEffect, useState} from 'react';
-import {P} from 'ts-pattern';
+import {useRouter} from 'next/router';
+import {memo, useCallback, useState} from 'react';
 
 import {SectionId} from '../../../data/data';
 import {GithubData} from '../../../data/dataDef';
@@ -10,11 +10,13 @@ import {SkillGroup} from './Skills';
 import TimelineItem from './TimelineItem';
 
 const Resume: NextPage<GithubData> = memo(({education, experience, skills}) => {
+  const router = useRouter();
   const previewNum = 1;
   const [showExperience, setShowExperience] = useState(false);
   const togglerExperience = useCallback(() => {
     setShowExperience(!showExperience);
-  }, [showExperience]);
+    if (showExperience) router.push('#resume');
+  }, [showExperience, router]);
 
   return (
     <Section className="bg-neutral-100" sectionId={SectionId.Resume}>
