@@ -11,7 +11,7 @@ import Portfolio from '../components/Sections/Portfolio';
 import Resume from '../components/Sections/Resume';
 import Testimonials from '../components/Sections/Testimonials';
 import {homePageMeta} from '../data/data';
-import {GithubData,GithubDataProps} from '../data/dataDef';
+import {GithubData, GithubDataProps} from '../data/dataDef';
 import {getAllGithubData} from '../data/github-data/main';
 
 // eslint-disable-next-line react-memo/require-memo
@@ -22,23 +22,21 @@ const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
   return (
     <Page description={description} title={title}>
       <Header {...githubData} />
-      <Hero {...githubData}/>
+      <Hero {...githubData} />
       <About {...githubData} />
       <Resume {...githubData} />
       <Portfolio {...githubData} />
-      {githubData.testimonialSection ? 
-      <Testimonials {...githubData} /> : null
-      }
-      <Contact {...githubData}  />
-      <Footer {...githubData}/>
+      {githubData.testimonialSection ? <Testimonials {...githubData} /> : null}
+      <Contact {...githubData} />
+      <Footer {...githubData} />
     </Page>
   );
 });
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const username : string = process.env.GITHUB_USERNAME as string;
+export const getStaticProps: GetServerSideProps = async () => {
+  const username: string = process.env.GITHUB_USERNAME as string;
   const githubData: GithubData = await getAllGithubData(username);
-  return {props: {githubData}};
-}
- 
+  return {props: {githubData}, revalidate: 1800};
+};
+
 export default Home;
