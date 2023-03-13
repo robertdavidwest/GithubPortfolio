@@ -26,6 +26,7 @@ async function formatPortfolioItems(data: any[]) {
       githubUrl: githubUrl,
       siteUrl: repo.homepage,
       image: imgUrl,
+      tags: repo.topics,
     };
     portfolioItems.push(portfolioItemData);
   }
