@@ -12,17 +12,28 @@ Team [Alphacas](https://github.com/alphacas) ([Chris Jung](https://github.com/cj
 
 ## How it works
 
-When you run this app in Dev or Prod, data will be automatically pulled from your public Github data, including your Bio and information and all of your **Starred** Github repos will show up as your projects in your portfolio!
+When you run this app in Dev or Prod, data will be automatically pulled from your public Github data, including your Bio and information and all of your **Pinned** Github repos will show up as your projects in your portfolio!
 
 ## Set up your Github Profile
 
 You will just need to make sure that your Github account conforms to the following features and your data will automatically be rendered.
 
-1. Create a user repo: Your Github Account should have a profile landing page. This is achieved by creating a github repo with the same name as your username.
-2. Create a `README.md` file in the repo: In your github user repo you will need a README file. In here you can store information for people to see when they visit your Github page, which is something we suggest you do even if you are not using this Github Portfolio builder. [Here](https://dev.to/puenehfaith/how-to-beautifully-organize-your-github-profile-dha?ck_subscriber_id=1030950679&utm_source=convertkit&utm_medium=email&utm_campaign=Diversify+Tech+%23221%20-%209810757) is a useful resource for putting that together in general.
-3. Inside the `README.md` add information about yourself, using the following template:
+### Basic Info
 
-   1. Add a **description** of yourself, this will show up in the aboutme section. Place the description between these tags:
+1. Ensure you have filled out all of your Github Profile information including your **name**, **bio**, **Social Accounts**, you can fill out your profile information at this url when you are loggedin : https://github.com/settings/profile.
+
+### Your respository selections for your projects
+
+2. On your github homepage `https://github.com/<your-username>`, click on **Customize your pins** and select the repos that you would like to show up in the project section of your site. Then, for every repo, follow these steps:
+   1. Click on the "settings" Icon in the About section of each repo. Add a description, a website url (if you have one) and add any Topics that are associated with your work. This could be languages used in the project e.g: **javascript**, **react** etc.
+   2. Add an image file in your repository named 'app-screenshot.png' with an image that you would like to have featured on each of your projects (if you don't add an image then a default octocat will be used)
+
+### More details about you
+
+3. Create a **user repo** in your Github account. Create a github repo with the same name as your username. Did you know that if you do this the repo has some special properties on Github, anything that you put in the repo `README.md` will show up on your Github profile page! We recommend setting this up even if you arn't using our template. [Here](https://dev.to/puenehfaith/how-to-beautifully-organize-your-github-profile-dha?ck_subscriber_id=1030950679&utm_source=convertkit&utm_medium=email&utm_campaign=Diversify+Tech+%23221%20-%209810757) is a useful resource for putting that together in general.
+1. Inside the `README.md` add more detailed information about yourself, using the following template:
+
+   1. Add a more detailed **description** of yourself (the github bio is quite short and serves as a headline item), this will show up in the aboutme section of your site! Place the description between these tags:
 
       ```
       <!-- description-start -->
@@ -72,18 +83,14 @@ You will just need to make sure that your Github account conforms to the followi
 
    (NOTE: If you don't want to show any of the following information on your Github page but still want it in your Github Portfolio then just put it between html comment tags ! like this: `<-- info here i dont want to show -->`
 
-4. Upload your resume to github in one of either of these locations (if you have data in both them number 1 will be selected):
+1. Upload your resume to github in one of either of these locations (if you have data in both them number 1 will be selected):
 
    1. `https://github.com/<username>/<username>/blob/main/resume.pdf` (note: `main` or `master` will work fine)
    2. `https://github.com/<username>/resume/blob/main/resume.pdf` (note: `main` or `master` will work fine)
 
-5. Star repositories that you would like to have featured in the "Portfolio" section of the website.
-   1. Add a description and a website url (you can link the repository if it is not a web based project). This can be done in the about tab of the repository.
-   2. Add a file in your repository called 'app-screenshot.png' with an image that you would like to have featured on the website
-
 ## Upload your Linkedin data to Github (optional)
 
-We have also made it possible for you to pull in your Experience, Education and received recommendations from your linked in profile! Unfortunetely LinkedIn does not make this data available via an API. So will need to follow these steps to manually obtain your linkedin data and use it on your website:
+We have also made it possible for you to pull in your **Experience**, **Education** and **received recommendations** from your linked in profile! Unfortunetely LinkedIn does not make this data available via an API. So will need to follow these steps to manually obtain your linkedin data and use it on your website:
 
 1. Follow these instructions from Linkedin to download your data: https://www.linkedin.com/help/linkedin/answer/a1339364 and be sure to select the option to download all data. For the data we need, a download link will become available 10 minutes after you have made the request.
 2. Download the data and unzip the file.
@@ -99,7 +106,7 @@ If you choose not to include linkedin data then these sections will simply be om
 
 ## Environemt Variables
 
-You will need a single environment variables to run the app in `dev` or `prod`. In dev you will need to create an environment file called `.env` and add your github user account to the file:
+For this project to pick up all of your data automatically, all you will need is a single environment variables to run the app in `dev` or `prod`. In dev you can create an environment file called `.env` and add your github user account to the file:
 
 ```
 # .env
@@ -118,7 +125,7 @@ We advise running the application in local development before you launch, just t
 
 To build this website, you will need to have the latest stable versions of Node and Yarn downloaded and installed on your machine. If you don't already have them, you can get Node [here,](https://nodejs.org/en/download/) and Yarn [here.](https://yarnpkg.com/getting-started/install)
 
-### 2. Fork and download this repo
+### 2. Fork and download this repo (and star if you like)
 
 Next, find the `Fork` button in the top right of this page. This will allow you to make your own copy, for more info on forking repo's see [here.](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) After this, download to your development machine using the green `Code` button at the top of the repo page.
 
