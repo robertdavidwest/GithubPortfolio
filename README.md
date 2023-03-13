@@ -100,7 +100,7 @@ We have also made it possible for you to pull in your **Experience**, **Educatio
 - `Positions.csv`
 - `Education.csv`
 
-That's it! Now the Sections **Experience**, **Education** and **Recommendations** will be populated with your data from linkedin. Anytime you want to refresh your linkedin data just download a new file from linkedin and replace the old one in the `<your-username>` repo.
+Now the Sections **Experience**, **Education** and **Recommendations** will be populated with your data from linkedin. Anytime you want to refresh your linkedin data just download a new file from linkedin and replace the old one in the `<your-username>` repo.
 
 If you choose not to include linkedin data then these sections will simply be omitted from the portfolio site.
 
@@ -116,6 +116,8 @@ GITHUB_USERNAME=<your-username>
 ## Thats it!
 
 Now that your Github account is configured correctly, follow the steps below to set up your Portfolio website!
+
+If you're feeling lucky, you can skip ahead to `Deployment` you have everything you need to run the app.
 
 ## Dev Setup
 
@@ -142,6 +144,8 @@ Of course, all of the code is there and nothing is hidden from you so if you wou
 Deploy to Vercel and enjoy your new Resume Website
 
 Deploying your new site to Vercel is simple, and can be done by following their guide [here.](https://vercel.com/guides/deploying-nextjs-with-vercel) When you're all done and the build succeeds, you should be given a url for your live site, go there and you'll see your new personal resume website! Congratulations!
+
+Remember to add the environment variable `GITHUB_USERNAME=<your-username>` when you deploy!
 
 Whenever you make changes in your Github account, the changes will automatically flow thru to your new website.
 
