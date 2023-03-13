@@ -147,7 +147,9 @@ Deploying your new site to Vercel is simple, and can be done by following their 
 
 Remember to add the environment variable `GITHUB_USERNAME=<your-username>` when you deploy!
 
-Whenever you make changes in your Github account, the changes will automatically flow thru to your new website. NOTE: The static web page will be refreshed every 30 minutes to don't expect to see the changes right away. We cannot check for new data more often than this because of the limitations on the github api. If you request an API TOKEN for the github API you will be able to make requests more often. If you do so, you can change the amount of time that the app will wait to check for new data [here](https://github.com/alphacas/GithubPortfolio/edit/main/README.md) by adjusting the value of `revalidate` (in seconds): 
+Whenever you make changes in your Github account, the changes will automatically flow thru to your new website. NOTE: The static web page will be refreshed every 30 minutes so don't expect to see the changes right away. We cannot check for new data more often than this because of the limitations on the github api. 
+
+While it is beyond the scope of this initial project, it is possible to request an API TOKEN for the github API for your account so that you will be able to make requests more often. You will need to make some change to the parts of the code that make requests. If you do so, you can change the amount of time that the app will wait to check for new data [here](https://github.com/alphacas/GithubPortfolio/edit/main/README.md) by adjusting the value of `revalidate` (in seconds). 
 
 
 ## Project Created & Maintained By
