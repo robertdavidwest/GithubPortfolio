@@ -99,6 +99,7 @@ export interface PortfolioItem {
   githubUrl: string;
   siteUrl?: string;
   image: string | StaticImageData;
+  tags?: string[];
 }
 
 /**
