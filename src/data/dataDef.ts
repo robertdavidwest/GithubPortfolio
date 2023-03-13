@@ -19,6 +19,18 @@ export interface GithubData {
   testimonialSection: TestimonialSection;
 }
 
+export interface RawPinnedRepo {
+  owner: string;
+  repo: string;
+  link: string;
+  description: string;
+  image: string;
+  language: string;
+  languageColor: string;
+  stars: string;
+  forks: number;
+}
+
 export interface HomepageMeta {
   title: string;
   description: string;
