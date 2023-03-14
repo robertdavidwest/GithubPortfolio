@@ -10,7 +10,6 @@ import Hero from '../components/Sections/Hero';
 import Portfolio from '../components/Sections/Portfolio';
 import Resume from '../components/Sections/Resume';
 import Testimonials from '../components/Sections/Testimonials';
-import {homePageMeta} from '../data/data';
 import {GithubData, GithubDataProps} from '../data/dataDef';
 import {getAllGithubData} from '../data/github-data/main';
 
@@ -18,7 +17,8 @@ import {getAllGithubData} from '../data/github-data/main';
 const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
 
 const Home: NextPage<GithubDataProps> = memo(({githubData}) => {
-  const {title, description} = homePageMeta;
+  const title = `${githubData.heroData.name}'s personal website.`;
+  const description = title;
   return (
     <Page description={description} title={title}>
       <Header {...githubData} />
