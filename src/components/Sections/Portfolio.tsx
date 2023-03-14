@@ -1,7 +1,6 @@
 import {ExternalLinkIcon} from '@heroicons/react/outline';
 import classNames from 'classnames';
 import {NextPage} from 'next';
-import Image from 'next/image';
 import {FC, memo, MouseEvent, useCallback, useEffect, useRef, useState} from 'react';
 
 import {isMobile} from '../../config';
@@ -46,13 +45,13 @@ const Card: FC<{item: PortfolioItem}> = memo(({item: item}) => {
   const {title, description, image, tags} = item;
   return (
     <div>
-      <Image alt={title} height="100%" layout="responsive" objectFit="contain" src={image} width="100%" />
+      <img className="object-cover md:min-h-[20rem] lg:h-60 lg:min-h-[15rem] lg:w-96" src={image}></img>
       <ItemOverlay item={item} />
-      <div className="px-6 py-4">
+      <div className="px-6 py-4 md:min-h-[10rem]">
         <div className="mb-2 text-xl font-bold text-white">{title}</div>
         <p className="text-xs text-white opacity-100 sm:text-sm">{description}</p>
       </div>
-      <div className="px-6 pt-4 pb-2">
+      <div className="px-6 pt-4 pb-2 md:min-h-[8rem]">
         {tags?.map(t => (
           <span className="mr-2 mb-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">
             {`#${t}`}

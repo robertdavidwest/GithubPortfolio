@@ -110,7 +110,8 @@ export interface PortfolioItem {
   description: string;
   githubUrl: string;
   siteUrl?: string;
-  image: string | StaticImageData;
+  image: string;
+  // image: string | StaticImageData;
   tags?: string[];
 }
 
@@ -160,7 +161,7 @@ export const ContactType = {
   Instagram: 'Instagram',
 } as const;
 
-export type ContactType = typeof ContactType[keyof typeof ContactType];
+export type ContactType = (typeof ContactType)[keyof typeof ContactType];
 
 export interface ContactItem {
   type: ContactType;
