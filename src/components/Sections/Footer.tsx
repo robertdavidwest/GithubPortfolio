@@ -6,7 +6,7 @@ import {SectionId} from '../../data/data';
 import {GithubData} from '../../data/dataDef';
 import Socials from '../Socials';
 
-const Footer: NextPage<GithubData> = memo((githubData) => (
+const Footer: NextPage<GithubData> = memo(githubData => (
   <div className="relative bg-neutral-900 px-4 pb-6 pt-12 sm:px-8 sm:pt-14 sm:pb-8">
     <div className="absolute inset-x-0 -top-4 flex justify-center sm:-top-6">
       <a
@@ -19,7 +19,9 @@ const Footer: NextPage<GithubData> = memo((githubData) => (
       <div className="flex gap-x-4 text-neutral-500">
         <Socials {...githubData} />
       </div>
-      <span className="text-sm text-neutral-700">© Copyright 2022 Tim Baker</span>
+      <span className="text-sm text-neutral-700">{`© Copyright ${new Date().getFullYear()} ${
+        githubData.heroData.name
+      }`}</span>
     </div>
   </div>
 ));
