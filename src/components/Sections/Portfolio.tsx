@@ -14,7 +14,7 @@ const Portfolio: NextPage<GithubData> = memo(({portfolioItems}) => {
     <Section className="bg-neutral-800" sectionId={SectionId.Portfolio}>
       <div className="relative h-max">
         <h2 className="text-2xl font-bold text-white">Projects</h2>
-        <span className="absolute inset-x-0 -bottom-1 border-b-2 border-orange-400" />
+        <span className="absolute inset-x-0 -bottom-1 border-b-2 border-green-400" />
       </div>
       <br />
       <div className="flex flex-col gap-y-8">

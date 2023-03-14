@@ -37,7 +37,7 @@ const Resume: NextPage<GithubData> = memo(({education, experience, skills}) => {
                   .map((item, index) => <TimelineItem item={item} key={`${item.title}-${index}`} />)}
             {experience.length > previewNum ? (
               <button
-                className="mt-3 w-32 bg-orange-500 px-5 py-2 text-white duration-300 hover:bg-orange-700"
+                className="mt-3 w-32 bg-green-500 px-5 py-2 text-white duration-300 hover:bg-green-700"
                 onClick={togglerExperience}>
                 {showExperience ? 'Show Less' : 'Show More'}
               </button>
