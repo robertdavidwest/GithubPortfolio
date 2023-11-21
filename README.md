@@ -104,13 +104,25 @@ Now the Sections **Experience**, **Education** and **Recommendations** will be p
 
 If you choose not to include linkedin data then these sections will simply be omitted from the portfolio site.
 
+## Get Token to use the Github graphql api
+
+* Login to your github account and go to : https://github.com/settings/apps
+* Click "Personal access tokens" then "Tokens (classic)
+* Click "Generate new token" > "Generate new token (classic)
+* Add a note. e.g "GithubPortfolio"
+* Set Expiration to "No Expiration". While Github warns against not having an expiration, there is no other way to keep the app working in perpetuity without intervention
+* You should not need to set any particular scope for this token since all the information needed should be publically available. If you want to access private repo info you can select "repo"
+* Click "Generate Token" and copy the token somewhere safe. You will not be able to retrieve it from Github again
+
+
 ## Environemt Variables
 
-For this project to pick up all of your data automatically, all you will need is a single environment variables to run the app in `dev` or `prod`. In dev you can create an environment file called `.env` and add your github user account to the file:
+For this project to pick up all of your data automatically, you will need two environment variables to run the app in `dev` or `prod`. In dev you can create an environment file called `.env` and add your github user account and github token to the file:
 
 ```
 # .env
 GITHUB_USERNAME=<your-username>
+GITHUB_TOKEN=<your-github-token>
 ```
 
 ## Thats it!
@@ -145,7 +157,12 @@ Deploy to Vercel and enjoy your new Resume Website
 
 Deploying your new site to Vercel is simple, and can be done by following their guide [here.](https://vercel.com/guides/deploying-nextjs-with-vercel) When you're all done and the build succeeds, you should be given a url for your live site, go there and you'll see your new personal resume website! Congratulations!
 
-Remember to add the environment variable `GITHUB_USERNAME=<your-username>` when you deploy!
+Remember to add the environment variables
+
+      GITHUB_USERNAME=<your-username>
+      GITHUB_TOKEN=<your-github-token>
+   
+when you deploy!
 
 Whenever you make changes in your Github account, the changes will automatically flow thru to your new website. NOTE: The static web page will be refreshed every 30 minutes so don't expect to see the changes right away. We cannot check for new data more often than this because of the limitations on the github api.
 

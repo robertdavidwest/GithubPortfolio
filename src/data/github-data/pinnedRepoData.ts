@@ -1,17 +1,63 @@
 import {PortfolioItem, RawPinnedRepo} from '../dataDef';
 
+async function postRequest(url = "", data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `bearer ${process.env.GITHUB_TOKEN}`,
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+function getGraphqlData(username: string) {
+  const data = {
+    query: `
+      query {
+        user(login: "${username}") {
+          pinnedItems(first: 6, types: REPOSITORY) {
+            totalCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  };
+  return data;
+}
+
 async function getRawPinnedRepos(username: string) {
   let data: RawPinnedRepo[];
   let apiUrls: string[];
   try {
-    const response = await fetch(`https://gh-pinned-repos.egoist.dev/?username=${username}`);
-    data = await response.json();
+    const graphQlData = getGraphqlData(username);
+    const postData = await postRequest("https://api.github.com/graphql", graphQlData)
+    data = postData.postData.user.pinnedItems.nodes;
     apiUrls = [];
     data.map(x => {
-      const {owner, repo} = x;
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+      const { name , owner } = x;
+      const { login } = owner
+      const apiUrl = `https://api.github.com/repos/${login}/${name}`;
       apiUrls.push(apiUrl);
     });
+
   } catch (error) {
     apiUrls = [];
   }
