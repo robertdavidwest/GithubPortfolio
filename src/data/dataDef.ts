@@ -20,10 +20,12 @@ export interface GithubData {
 }
 
 export interface RawPinnedRepo {
-  name: string
-  owner: {
-    login: string
-  }
+  node: {
+    name: string;
+    owner: {
+      login: string;
+    };
+  };
 }
 
 export interface HomepageMeta {

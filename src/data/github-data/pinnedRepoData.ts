@@ -1,18 +1,18 @@
 import {PortfolioItem, RawPinnedRepo} from '../dataDef';
 
-async function postRequest(url = "", data = {}) {
+async function postRequest(url = '', data = {}) {
   // Default options are marked with *
   const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": `bearer ${process.env.GITHUB_TOKEN}`,
+      'Content-Type': 'application/json',
+      Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
   return response.json(); // parses JSON response into native JavaScript objects
@@ -44,22 +44,19 @@ function getGraphqlData(username: string) {
 }
 
 async function getRawPinnedRepos(username: string) {
-  let data: RawPinnedRepo[];
-  let apiUrls: string[];
+  const apiUrls: string[] = [];
   try {
     const graphQlData = getGraphqlData(username);
-    const postData = await postRequest("https://api.github.com/graphql", graphQlData)
-    data = postData.postData.user.pinnedItems.nodes;
-    apiUrls = [];
+    const postData = await postRequest('https://api.github.com/graphql', graphQlData);
+    const data: RawPinnedRepo[] = postData.data.user.pinnedItems.edges;
     data.map(x => {
-      const { name , owner } = x;
-      const { login } = owner
+      const {name, owner} = x.node;
+      const {login} = owner;
       const apiUrl = `https://api.github.com/repos/${login}/${name}`;
       apiUrls.push(apiUrl);
     });
-
   } catch (error) {
-    apiUrls = [];
+    return apiUrls;
   }
   return apiUrls;
 }
